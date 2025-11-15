@@ -1,0 +1,165 @@
+
+body.sobre-nos {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    background: #6b8490;
+    font-family: "Nunito", sans-serif;
+    color: #333;
+}
+
+
+.cabecalho {
+    width: 100%;
+    background: #d5bdaf;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cabecalho .logo img {
+    height: 55px;
+}
+
+.menu a {
+    color: #333;
+    margin-left: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #a3a3a3;
+}
+
+
+.missao {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px 5%;
+    gap: 40px;
+    background: #E3D5CA;
+    justify-content: center;
+}
+
+.texto-missao h2 {
+    font-size: 30px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.texto-sobrenos {
+    background: #d5bdaf;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+.video img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.legenda {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.equipe {
+    padding: 50px 5%;
+    text-align: center;
+    background-color: #E3D5CA;
+}
+
+.equipe .titulo {
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.equipe .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.equipe .card {
+    background: #d5bdaf;
+    padding: 15px;
+    border-radius: 12px;
+    width: 180px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.equipe .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.equipe .card:hover {
+    background: #4b4b4b;
+}
+
+.card-text {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+.parceiros {
+    padding: 50px 5%;
+    text-align: center;
+    background-color: #E3D5CA;
+}
+
+.parceiros .titulo {
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.parceiros .row {
+    display: flex;
+    justify-content: center;
+}
+
+.parceiros .card {
+    background: #d5bdaf;
+    padding: 20px;
+    width: 150px;
+    border-radius: 12px;
+}
+
+.parceiros img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.parceiros .card-text {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+.rodape {
+    background: #6b8490;
+    padding: 30px 5%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.rodape p,
+.rodape strong {
+    color: #ddd;
+    font-size: 14px;
+}
