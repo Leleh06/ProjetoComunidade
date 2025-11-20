@@ -78,7 +78,7 @@ body.sobre-nos {
 .legenda {
     margin-top: 8px;
     font-size: 14px;
-    color: #eee;
+    color: #333;
 }
 
 
@@ -91,7 +91,7 @@ body.sobre-nos {
 
 .titulo {
     font-size: 30px;
-    color: #fff;
+    color: #333;
     margin-bottom: 35px;
 }
 
@@ -136,9 +136,9 @@ body.sobre-nos {
     background-color: #E3D5CA;
 }
 
-.parceiros .card {
+/* .parceiros .card {
     width: 150px;
-}
+} */
 
 .rodape {
     background: #6b8490; 
