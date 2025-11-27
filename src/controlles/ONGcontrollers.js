@@ -1,5 +1,7 @@
 import { db } from "../config/db.sql";
 
+
+// Criar conta ONG
 export const createONG = async (req, res) => {
     try {
         const {body} = req;
@@ -19,6 +21,7 @@ export const createONG = async (req, res) => {
     }
 };
 
+// Logar no site 
 export const logarONG = async (req, res) => {
     try {
         const {body} = req;
@@ -41,10 +44,37 @@ export const logarONG = async (req, res) => {
     }
 }
 
+
+//Deletar conta 
 export const deletarONG = async (req, res) => {
     try {
-        
+        const {id} = req.params
+        const [results] = await db.query (
+            "DELETE * FROM ongs WHERE id_ong=?",
+            id
+        )
+        res.status(201).json({mensagem:"Conta ONG deleta com sucesso"})
+
     } catch (error) {
-        
+        console.log(error);
+        res.status(401).json ({mensagem: "Erro ao excluir conta! Confira as dados informados"})
     }
 }
+
+//Atualizar dados 
+export const atualizarONG = async (req,res) => {
+    try {
+        const {id} = req.params;
+        const {body} =req;
+        const [results] = db.query(
+            "UPDATE ongs SET nome=?, email=?, senha=?, contato=? WHERE id_ong=?",
+            [body.nome, body.email, body.senha, body.contato, id]
+        );
+        res.status(200).json({ongs:results, mensagem: "Dados atualizado com sucesso!!"})
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({erro: "Dados preenchido incorreto"})
+    }
+}
+

@@ -1,11 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>login</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
+
 <body>
-    
+    <header class="cabecalho">
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/imgs/Logo-CONECTA.png" alt="Logo Conecta+">
+            </a>
+        </div>
+        <nav class="menu">
+            <a href="/index.html">Início</a>
+            <a href="/pagina-cadastro/index.html">Cadastrar-se</a>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <div class="form-section">
+            <h2>Bem-Vindo!</h2>
+            <label for="email">email:</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu email">
+
+            <label for="senha">senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+
+            <div class="botao">
+                <button class="login-button"><a class="ent" href="/index.html">ENTRAR</a></button><br>
+                <a class="signup-link" href="/pagina-cadastro/index.html">Não tem conta? Cadastre-se</a>
+            </div>
+        </div>
+
+      
+
+        <div class="right-section">
+            <img src="/imgs/logocont.png" alt="logo">
+            <div class="slogan">"Escute. Compartilhe. Transforme."</div>
+
+        </div>
+    </div>
+
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
+            <p><strong>Telefone:</strong> (48) 3239-5801</p>
+            <div class="redes-sociais">
+                <a href="https://wa.me/554832395801" target="_blank">
+                    <img src="/imgs/icons/whats.svg" alt="WhatsApp">
+                </a>
+                <a href="https://facebook.com" target="_blank">
+                    <img src="/imgs/icons/face.svg" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="/imgs/icons/insta.svg" alt="Instagram">
+                </a>
+            </div>
+            <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
+        </div>
+    </footer>
+   <script src="script.js"></script>
 </body>
+
 </html>
