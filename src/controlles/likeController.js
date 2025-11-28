@@ -1,4 +1,4 @@
-import {} from "../config/db.js"
+import {db} from "../config/db.js"
 
 //post Curtida
 export const curtir = async (req, res) => {
@@ -48,4 +48,3 @@ export const retirarLike = async (req,res) => {
         console.log(error)
     }
 }
-

@@ -1,12 +1,17 @@
-app.post("ongsCreate", async (res,req) => {})
+import express from "express";
+import { conectaRouter } from "../src/router/router";
 
+const app = express();
+const PORT = 3000;
 
+app.use(express.json());
 
-app.get("/likes", async (res, req) => {
-    try {
-        const [results] = await pool.query ('SELECT * FROM curtida')
-        res.send(results)
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
+app.use(conectaRouter);
+
+app.listen(PORT, () => {
+    console.log(`Rodando em http://localhost:${PORT}`);
+});
