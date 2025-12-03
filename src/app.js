@@ -1,5 +1,5 @@
 import express from "express";
-import { conectaRouter } from "../src/router/router";
+import { conectaRouter } from "./router.js";
 
 const app = express();
 const PORT = 3000;

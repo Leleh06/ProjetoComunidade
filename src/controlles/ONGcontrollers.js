@@ -1,80 +1,63 @@
-import { db } from "../config/db.sql";
+import * as ongService from '../services/ongService.js'
 
-
-// Criar conta ONG
-export const createONG = async (req, res) => {
+// Criar no site
+export const createONG = async(req, res) => {
     try {
         const {body} = req;
-        const [results] = await db.query(
-            "INSERT INTO ong (nome, cnpj, area_atuacao, email, senha, contato) VALUES (?,?,?,?,?)",
-            [body.nome, body.cnpj, body.area_atuacao, body.email, body.senha, body.contato]
-        );
-
-        const [ongCriada] = await db.query(
-            "SELECT * FROM ong WHERE id=?",
-            results.insertId
-        );
-
-        res.status(201).json(ongCriada)
-    } catch (error) {
-        console.log(error)
-    }
-};
-
-// Logar no site 
-export const logarONG = async (req, res) => {
-    try {
-        const {body} = req;
-
-        const [ong] = await db.query(
-            "SELECT * FROM ong WHERE email=? and senha=?"
-            [body.email, body.senha]
-        );
-
-        if (ong.length > 0) {
-            return res.status(200).json({
-                message: "ONG logada com sucesso! Bem vindo!!",
-                dados: ong
-            })
-        }else {
-            return res.status(404).send("Email ou senha errada!");
-        }
+        const ongCriada = ongService.ongCriada(body.nome, body.email, body.senha, body.contato);
+        res.status(201).json({message: "Ong criada com sucesso!"}, ongCriada)
     } catch (error) {
         console.log(error);
+        res.status(400).json({message: "Não foi possível criar a Ong, tente novamente"});
     }
 }
 
-
-//Deletar conta 
-export const deletarONG = async (req, res) => {
+// Logar Ong
+export const logarONG = async(req, res) => {
     try {
-        const {id} = req.params
-        const [results] = await db.query (
-            "DELETE * FROM ongs WHERE id_ong=?",
-            id
-        )
-        res.status(201).json({mensagem:"Conta ONG deleta com sucesso"})
+        const {body} = req;
+        const ongLogada = ongService.logarONG(body.nome, body.senha);
+        res.status(200).json({message: "Ong logada com sucesso!"}, ongLogada)
+    } catch (error) {
+         console.log(error);
+        res.status(400).json({message: "Não foi possível entrar na Ong, tente novamente"});
+    }
+}
 
+// mostrarOng
+export const mostrarONG = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const [results] = await db.query(
+            'SELECT * FROM ongs WHERE id_ong=?', id);
+        res.status(200).json({message: "Ong encontrada"}, results);
     } catch (error) {
         console.log(error);
-        res.status(401).json ({mensagem: "Erro ao excluir conta! Confira as dados informados"})
+        res.status(400).json({message: "Não foi possível mostrar a Ong"})
     }
 }
 
 //Atualizar dados 
-export const atualizarONG = async (req,res) => {
+export const atualizarONG = async(req, res) => {
     try {
         const {id} = req.params;
-        const {body} =req;
-        const [results] = db.query(
-            "UPDATE ongs SET nome=?, email=?, senha=?, contato=? WHERE id_ong=?",
-            [body.nome, body.email, body.senha, body.contato, id]
-        );
-        res.status(200).json({ongs:results, mensagem: "Dados atualizado com sucesso!!"})
-
+        const {body} = req;
+        const ongAtualizada = ongService.atualizarONG(body.nome, body.email, body.senha, body.contato, id);
+        res.status(200).json({message: "Ong atualizada com suceso!"}, ongAtualizada)
     } catch (error) {
         console.log(error);
-        res.status(400).json({erro: "Dados preenchido incorreto"})
+        res.status(400).json({message: "Não foi possível atualizar os dados da ong, tente novamente"})
     }
 }
 
+//Deletar conta 
+export const deletarOng = async(req, res) => {
+    try {
+        const {id} = req.params;
+        const ongDeletada = ongService.deletarONG(id);
+        res.status(200).json({message: "Ong deletada com sucesso!"}, ongDeletada);
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({message: "Não foi possível deletar a ong, tente novamente"});
+    }
+}

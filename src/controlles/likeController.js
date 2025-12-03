@@ -1,26 +1,23 @@
-import {db} from "../config/db.js"
+// import { db } from "../config/db.js"
+import * as likeService from '../services/likeService.js'
 
 //post Curtida
 export const curtir = async (req, res) => {
     try {
-        const { body} = req;
-        const [results] = await db.query(
-            "INSERT INTO curtida (id_ong, id_usuario) VALUES (?,?)",
-            [body.id_ong, body.id_usuario]
-        )
-        const [curtidaCriada] = await db.query(
-            "SELECT*FROM curtida WHERE id=?",
-            results.insertId
-        );
-        res.status(201).json(curtidaCriada);
-
+        const { body } = req;
+        const likeCriado = likeService.curtir(body.id_ong, body.id_usuario);
+        res.status(201).json({ message: "Curtido!!" }, likeCriado)
     } catch (error) {
         console.log(error)
+        res.status(400).json({ message: "Não foi possível curtir" });
     }
-};
+}
 
+// refazer
+// ---------------------------------------
+// ---------------------------------------
 //get Curtida
-export const mostrarLike = async (req,res) => {
+export const mostrarLike = async (req, res) => {
     try {
         const [results] = await db.query(
             "SELECT * FROM curtida",
@@ -33,9 +30,9 @@ export const mostrarLike = async (req,res) => {
 }
 
 //delete Curtida
-export const retirarLike = async (req,res) => {
+export const retirarLike = async (req, res) => {
     try {
-        const {query} = req;
+        const { query } = req;
         const id_ong = Number(query.id_ong)
         const id_usuario = Number(query.id_usuario)
         const [results] = await db.query(
@@ -48,3 +45,8 @@ export const retirarLike = async (req,res) => {
         console.log(error)
     }
 }
+
+
+
+
+
