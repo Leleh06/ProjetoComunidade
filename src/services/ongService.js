@@ -1,6 +1,7 @@
 import {db} from '../config/db.js';
 import express from 'express'
 
+// Criar no site
 const createONG = async (nome, cnpj, area_atuacao, email, senha, contato) => {
     const [results] = await db.query(
         'INSERT INTO ong (nome, cnpj, area_atuacao, email, senha, contato) VALUES (?,?,?,?,?,?)',
@@ -11,7 +12,7 @@ const createONG = async (nome, cnpj, area_atuacao, email, senha, contato) => {
 
     return ongCriada;
 }
-
+// Logar Ong
 const logarONG = async (email, senha) => {
     const [results] = await db.query(
         'SELECT * FROM ong WHERE `email`=? and `senha`=?',
@@ -21,14 +22,14 @@ const logarONG = async (email, senha) => {
         results.insertId);
     return ongLogada;
 }
-
+// mostrarOng
 const mostrarONG = async (id) => {
     const {id} = req.params;
     const [results] = await db.query(
         'SELECT * FROM ongs WHERE id_ong=?', id);
     return results;
 }
-
+//Atualizar dados 
 const atualizarONG = async (nome, email, senha, contato, id) => {
     const {id} = req.params;
     const [results] = await db.query(
@@ -38,7 +39,7 @@ const atualizarONG = async (nome, email, senha, contato, id) => {
         'SELECT * FROM ongs WHERE id_ong=?', results.insertId);
     return ongAtualizada;
 }
-
+//Deletar conta 
 const deletarONG = async(id) => {
     const [results] = await db.query(
         'DELETE FROM ongs WHERE id_ong=?', id);

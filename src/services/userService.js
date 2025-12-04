@@ -1,37 +1,36 @@
-import {db} from '../config/db.js';
-
+import { db } from '../config/db.js';
 import express from 'express'
 
-const createUser = async (nome,bairro,email,senha) => {
-    const [results] = await db.query (
+// CRIAR
+const createUser = async (nome, bairro, email, senha) => {
+    const [results] = await db.query(
         'INSERT INTO usuario (nome,bairro,email,senha) VALUES (?,?,?,?)',
-        [nome,bairro,email,senha]);
-    
-        
+        [nome, bairro, email, senha]);
+
+
     const [usuarioCriado] = await db.query(
         'SELECT*FROM usuario WHERE id_usuario=?',
         results.insertId);
 
-        return usuarioCriado;
+    return usuarioCriado;
 };
 
 
-// const logarUser
-// check
+// logarUser
 const logarUser = async (email, senha) => {
     const [results] = await db.query(
         'SELECT * FROM usuario WHERE `email`=? and `senha`=?',
-        [email,senha]);
+        [email, senha]);
     const [usuarioLogado] = await db.query(
         'SELECT * FROM usuario WHERE id_usuario=?',
         results.insertId);
 
-        return usuarioLogado;
+    return usuarioLogado;
 }
 
 // const atualizarUser
-const atualizarUser = async (nome, bairro, email, senha, id) =>{
-    const {id} = requestAnimationFrame.params;
+const atualizarUser = async (nome, bairro, email, senha, id) => {
+    const { id } = requestAnimationFrame.params;
     const [results] = await db.query(
         'UPDATE usuario SET `nome`=?, `bairro`=?, `email`=?, `senha`=? WHERE id_usuario=?',
         [nome, bairro, email, senha, id]);
@@ -55,4 +54,4 @@ const deletarUser = async (id) => {
     return usuarioDeletado
 }
 
-export {createUser, logarUser, atualizarUser, deletarUser};
+export { createUser, logarUser, atualizarUser, deletarUser };

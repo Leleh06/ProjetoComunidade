@@ -16,7 +16,7 @@
             </a>
         </div>
         <nav class="nav">
-            <a href="../view/inicio.html">Início</a>
+            <a href="../view/inicio2.html">Início</a>
             <a href="/pag-comunidade/index.html">Comunidade</a>
             <a href="/pag-perfil/index.html">Perfil</a>
         </nav>
@@ -30,7 +30,7 @@
                 <button>Vídeo</button>
             </div>
 
-            <div class="form">
+            <div class="form-relato">
                 <div class="col">
                     <label for="nome">Nome (opcional)</label>
                     <input type="text" id="nome" placeholder="Seu nome">
@@ -64,6 +64,31 @@
 
         <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
     </footer>
+
+    
+    <script>
+        document.getElementById('form-relato').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const payload = {
+                nome: nome.value,
+                categoria: categoria.value,
+                descriçaõ: descricao.value,
+                foto: foto.value,
+                video: video.value
+            };
+
+            fetch('http://localhost:3000/relatoCriar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+                .then(res => res.json())
+                .then(data => console.log('Sucesso:', data))
+                .catch(err => console.error('Erro:', err));
+        });
+
+    </script>
 
 </body>
 

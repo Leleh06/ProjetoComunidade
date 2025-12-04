@@ -22,12 +22,15 @@ CREATE TABLE ongs(
     contato BIGINT(14)
 );
 
-CREATE TABLE post(
-	id_post INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(id_post),
+CREATE TABLE post (
+    id_post INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY(id_post)
     nome VARCHAR(50),
-    categoria ENUM ('Perigo', 'Denúncia', 'Sobre o Bairro') NOT NULL,
-    descricao VARCHAR(500) NOT NULL
+    categoria ENUM('Perigo', 'Denúncia', 'Sobre o Bairro') NOT NULL,
+    descricao VARCHAR(500) NOT NULL,
+
+    foto LONGBLOB,   -- Aqui será armazenado o ARQUIVO da imagem
+    video LONGBLOB,  -- Aqui será armazenado o ARQUIVO do vídeo
 );
 
 CREATE TABLE comentar(
@@ -52,3 +55,7 @@ CREATE TABLE curtida(
     FOREIGN KEY(userLike_id)
     REFERENCES usuario(id_usuario)
 );
+
+CREATE TABLE relato(
+
+)
