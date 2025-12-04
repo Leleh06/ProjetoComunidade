@@ -51,6 +51,43 @@
         <p>© 2025 Conecta+. Todos os direitos reservados.</p>
     </footer>
 
+
+    <script>
+        document.getElementById("form-simples").addEventListener("submit", function(event) {
+            const nome = document.getElementById("nome").value;
+            const idade = document.getElementById("bairro").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+        
+            const url = "http://localhost:3000/createUser";
+        
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    idade: bairro,
+                    email: email,
+                    senha: senha
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Usuário cadastrado com sucesso!");
+            })
+            .catch(error => console.log("Error: ", error));
+            
+        });
+
+        function verificarURL () {
+            let url = window.location.href;
+
+            if(url === "login")
+                
+        }
+        </script>
 </body>
 
 </html>

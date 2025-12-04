@@ -36,7 +36,7 @@
             </div>
         </div>
 
-      
+
 
         <div class="right-section">
             <img src="/imgs/logocont.png" alt="logo">
@@ -63,6 +63,38 @@
             <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
         </div>
     </footer>
+
+    <script>
+
+        document.getElementById('form-section').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            const url = "http://localhost:3000/login";
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            })
+                .then((res) => {
+                    if (!res.ok)
+                        alert("Erro ao fazer login");
+                    return res.json();
+                }).then((data) => {
+                    if (data)
+                        return alert("Login bem sucedido!")
+                })
+                .catch((error) => console.log(error))
+
+        });
+
+    </script>
+    
 </body>
 
 </html>
