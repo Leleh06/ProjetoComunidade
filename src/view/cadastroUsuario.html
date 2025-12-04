@@ -53,43 +53,29 @@
 
 
     <script>
-        
-        document.getElementById("form-simples").addEventListener("submit", function(event) {
+        document.getElementById("form-simples").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
             const nome = document.getElementById("nome").value;
-            const idade = document.getElementById("bairro").value;
+            const bairro = document.getElementById("bairro").value;
             const email = document.getElementById("email").value;
             const senha = document.getElementById("senha").value;
-        
-            const url = "http://localhost:3000/createUser";
-        
-            fetch(url, {
+
+            const resposta = await fetch("http://localhost:3000/usuarioCriar", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    nome: nome,
-                    idade: bairro,
-                    email: email,
-                    senha: senha
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, bairro, email, senha })
+            });
+
+            if (resposta.ok) {
                 alert("Usuário cadastrado com sucesso!");
-            })
-            .catch(error => console.log("Error: ", error));
-            
+                window.location.href = "../view/login.html";
+            } else {
+                alert("Erro ao cadastrar usuário");
+            }
         });
+    </script>
 
-        // function verificarURL () {
-        //     let url = window.location.href;
-
-        //     if(url === "login")
-                
-        // }
-
-        </script>
 </body>
 
 </html>

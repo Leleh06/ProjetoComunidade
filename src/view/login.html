@@ -31,7 +31,7 @@
             <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
 
             <div class="botao">
-                <button class="login-button"><a class="ent" href="../view/inicio2.html">ENTRAR</a></button><br>
+                <button type="submit" class="login-button">ENTRAR</button><br>
                 <a class="signup-link" href="../view/cadastroUsuario.html">Não tem conta? Cadastre-se Usuário</a>
                 <a class="signup-link" href="../view/cadastroONG.html">Cadastre-se ONG</a>
             </div>
@@ -66,36 +66,28 @@
     </footer>
 
     <script>
-
-        document.getElementById('form-section').addEventListener('submit', function (event) {
+        document.getElementById("form-login").addEventListener("submit", async (event) => {
             event.preventDefault();
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
 
-            const url = "http://localhost:3000/login";
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
 
-            fetch(url, {
+            const resposta = await fetch("http://localhost:3000/usuarioLogar", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": 'application/json'
-                },
-                body: JSON.stringify({ email, senha })
-            })
-                .then((res) => {
-                    if (!res.ok)
-                        alert("Erro ao fazer login");
-                    return res.json();
-                }).then((data) => {
-                    if (data)
-                        return alert("Login bem sucedido!")
-                })
-                .catch((error) => console.log(error))
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, senha }),
+                credentials: "include" // mantém sessão
+            });
 
+            if (resposta.ok) {
+                alert("Login bem sucedido!");
+                window.location.href = "../view/inicio2.html";
+            } else {
+                alert("Email ou senha inválidos");
+            }
         });
-
     </script>
-    
+
 </body>
 
 </html>
