@@ -30,7 +30,7 @@ const logarUser = async (email, senha) => {
 
 // const atualizarUser
 const atualizarUser = async (nome, bairro, email, senha, id) => {
-    const { id } = requestAnimationFrame.params;
+    // const { id } = req.params;
     const [results] = await db.query(
         'UPDATE usuario SET `nome`=?, `bairro`=?, `email`=?, `senha`=? WHERE id_usuario=?',
         [nome, bairro, email, senha, id]);

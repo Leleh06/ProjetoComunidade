@@ -24,17 +24,18 @@ const logarONG = async (email, senha) => {
 }
 // mostrarOng
 const mostrarONG = async (id) => {
-    const {id} = req.params;
+    // const {id} = req.params;
     const [results] = await db.query(
-        'SELECT * FROM ongs WHERE id_ong=?', id);
+        'SELECT * FROM ongs WHERE id_ong=?', [id]);
     return results;
 }
+
 //Atualizar dados 
-const atualizarONG = async (nome, email, senha, contato, id) => {
-    const {id} = req.params;
+const atualizarONG = async (nome, email, senha, contato, [id]) => {
+    // const {id} = req.params;
     const [results] = await db.query(
         'UPDATE ongs SET `nome`=?, `email`=?, `senha`=?, `contato`=? WHERE id_ong=?',
-        [nome, email, senha, contato, id]);
+        [nome, email, senha, contato, [id]]);
     const [ongAtualizada] = await db.query(
         'SELECT * FROM ongs WHERE id_ong=?', results.insertId);
     return ongAtualizada;
@@ -42,7 +43,7 @@ const atualizarONG = async (nome, email, senha, contato, id) => {
 //Deletar conta 
 const deletarONG = async(id) => {
     const [results] = await db.query(
-        'DELETE FROM ongs WHERE id_ong=?', id);
+        'DELETE FROM ongs WHERE id_ong=?', [id]);
     const [ongDeletada] = await db.query(
         'SELECT * FROM ongs WHERE id_ong=?', results.insertId);
     return ongDeletada;

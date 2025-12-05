@@ -36,7 +36,7 @@
             <input type="text" placeholder="00.000.000/0000-00" required>
 
             <label>Área de atuação</label>
-            <input type="text" placeholder="Ex: Educação, Saúde..." required> 
+            <input type="text" placeholder="Ex: Educação, Saúde..." required>
 
             <label>Contato</label>
             <input type="text" placeholder="(00) 00000-0000" required>
@@ -49,6 +49,31 @@
     <footer class="rodape">
         <p>© 2025 Conecta+. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        document.getElementById("form-ong").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const nome = document.getElementById("nome").value;
+            const cnpj = document.getElementById("cnpj").value;
+            const area_atuacao = document.getElementById("area_atuacao").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+            const contato = document.getElementById("contato").value;
+
+            const resposta = await fetch("http://localhost:3000/ongsCriar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, cnpj, area_atuacao, email, senha, contato })
+            });
+
+            if (resposta.ok) {
+                alert("ONG cadastrada com sucesso!");
+                window.location.href = "../view/login.html";
+            } else {
+                alert("Erro ao cadastrar ONG");
+            }
+        });
+    </script>
 
 </body>
 

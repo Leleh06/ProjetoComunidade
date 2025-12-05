@@ -31,7 +31,8 @@
             <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
 
             <div class="botao">
-                <button type="submit" class="login-button">ENTRAR</button><br>
+                <button type="submit" class="login-button">ENTRAR Usuário</button>
+                <button type="submit" class="login-button-ong">ENTRAR ONG</button>
                 <a class="signup-link" href="../view/cadastroUsuario.html">Não tem conta? Cadastre-se Usuário</a>
                 <a class="signup-link" href="../view/cadastroONG.html">Cadastre-se ONG</a>
             </div>
@@ -65,10 +66,11 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById("form-login").addEventListener("submit", async (event) => {
-            event.preventDefault();
 
+    <script>
+        // ================== LOGIN USUÁRIO ==================
+        document.getElementById("login-button")?.addEventListener("click", async (event) => {
+            event.preventDefault();
             const email = document.getElementById("email").value;
             const senha = document.getElementById("senha").value;
 
@@ -76,14 +78,33 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, senha }),
-                credentials: "include" // mantém sessão
+                credentials: "include"
             });
 
             if (resposta.ok) {
-                alert("Login bem sucedido!");
-                window.location.href = "../view/inicio2.html";
+                window.location.href = "../view/meuPerfil.html"; // redireciona para perfil
             } else {
-                alert("Email ou senha inválidos");
+                alert("Email ou senha inválidos (usuário)");
+            }
+        });
+
+        // ================== LOGIN ONG ==================
+        document.getElementById("login-button-ong")?.addEventListener("click", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            const resposta = await fetch("http://localhost:3000/ongsLogar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, senha }),
+                credentials: "include"
+            });
+
+            if (resposta.ok) {
+                window.location.href = "../view/meuPerfil.html"; // redireciona para perfil
+            } else {
+                alert("Email ou senha inválidos (ONG)");
             }
         });
     </script>

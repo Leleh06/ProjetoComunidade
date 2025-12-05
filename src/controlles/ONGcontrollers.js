@@ -27,9 +27,9 @@ export const logarONG = async(req, res) => {
 // mostrarOng
 export const mostrarONG = async (req, res) => {
     try {
-        const {id} = req.params;
+        // const {id} = req.params;
         const [results] = await db.query(
-            'SELECT * FROM ongs WHERE id_ong=?', id);
+            'SELECT * FROM ongs WHERE id_ong=?',[ id]);
         res.status(200).json({message: "Ong encontrada"}, results);
     } catch (error) {
         console.log(error);
@@ -40,9 +40,9 @@ export const mostrarONG = async (req, res) => {
 //Atualizar dados 
 export const atualizarONG = async(req, res) => {
     try {
-        const {id} = req.params;
+        // const {id} = req.params;
         const {body} = req;
-        const ongAtualizada = ongService.atualizarONG(body.nome, body.email, body.senha, body.contato, id);
+        const ongAtualizada = ongService.atualizarONG(body.nome, body.email, body.senha, body.contato, [id]);
         res.status(200).json({message: "Ong atualizada com suceso!"}, ongAtualizada)
     } catch (error) {
         console.log(error);
@@ -53,7 +53,7 @@ export const atualizarONG = async(req, res) => {
 //Deletar conta 
 export const deletarOng = async(req, res) => {
     try {
-        const {id} = req.params;
+        // const {id} = req.params;
         const ongDeletada = ongService.deletarONG(id);
         res.status(200).json({message: "Ong deletada com sucesso!"}, ongDeletada);
     } catch (error) {

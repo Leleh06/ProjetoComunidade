@@ -6,10 +6,10 @@ import {
     createONG,
     logarONG,
     mostrarONG,
-    deletarONG,
+    deletarOng,
     atualizarONG
 
-} from "./controlles/ONGcontrollers.js";
+} from "./controlles/ongControllers.js";
 
 conectaRouter.post("/ongsCriar", createONG);
 
@@ -17,7 +17,7 @@ conectaRouter.post("/ongsLogar", logarONG);
 
 conectaRouter.get("/ongsMostra/:id", mostrarONG);
 
-conectaRouter.delete("/ongsDelete/:id", deletarONG);
+conectaRouter.delete("/ongsDelete/:id", deletarOng);
 
 conectaRouter.put("/ongsUpdate/:id", atualizarONG);
 
@@ -53,8 +53,12 @@ conectaRouter.delete("/curtidaDeleta", retirarLike);
 
 // RELATOS
 import {
-
+    relato,
+    atualizarRelato,
+    deletarRelato,
+    listarRelato
 } from "./controlles/relatosControllers.js"
+
 conectaRouter.post("/relatoCriar", relato);
 conectaRouter.put("/relatoUpdate", atualizarRelato);
 conectaRouter.delete("/relatoDelet", deletarRelato);

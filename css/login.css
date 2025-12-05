@@ -131,6 +131,20 @@ body {
     text-align: center;
 }
 
+.login-button-ong {
+    background-color: #556c78;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: auto; /* IMPORTANTE: evita ficar gigante */
+    text-align: center;
+}
+
 .login-button a {
     color: white;
     text-decoration: none;
