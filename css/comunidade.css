@@ -1,0 +1,219 @@
+/* ===== RESET E CONFIGURAÇÃO BASE ===== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    /* mantém seu fundo original */
+    background-color: #f3e5d8;
+
+    /* habilita o rodapé colado no fim */
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CONTEÚDO PRINCIPAL */
+section {
+    flex: 1;
+    /* <-- ESSA LINHA É A CHAVE */
+}
+
+/* ======== CABEÇALHO ======== */
+
+.cabecalho {
+    width: 100%;
+    background-color: #D5BDAF;
+    padding: 10px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cabecalho img {
+    height: 45px;
+}
+
+.menu a {
+    margin-left: 25px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #eee;
+}
+
+/* ======== TÍTULO ======== */
+
+.secao-relatos h2 {
+    margin: 40px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+/* ======== DROPDOWN ======== */
+
+.dropdown {
+    position: relative;
+    margin-left: 40px;
+    margin-bottom: 25px;
+}
+
+.dropdown-button {
+    background-color: #5a5a5a;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dropdown-button:hover {
+    background-color: #444;
+}
+
+.dropdown-menu {
+    list-style: none;
+    position: absolute;
+    top: 42px;
+    left: 0;
+    background-color: white;
+    width: 180px;
+    border-radius: 6px;
+    padding: 10px 0;
+    display: none;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #eee;
+}
+
+/* ======== CARDS ======== */
+
+.cards-container {
+    display: flex;
+    gap: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    flex-wrap: nowrap;
+}
+
+.card-relato {
+    width: 260px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-relato img {
+    width: 100%;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+.card-relato h4 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.card-relato small {
+    color: #444;
+}
+
+.card-relato p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* ======== BOTÕES DO CARD ======== */
+
+.acoes-relato {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.acoes-relato button {
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    color: #444;
+    cursor: pointer;
+}
+
+.acoes-relato button:hover {
+    text-decoration: underline;
+}
+
+/* ======== BOTÃO ENVIAR RELATO ======== */
+
+.enviar-relato {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+.enviar-relato a {
+    background-color: #556c78;
+    color: white;
+    padding: 12px 22px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.enviar-relato a:hover {
+    background-color: #7492a1d1;
+}
+
+/* ======== RODAPÉ ======== */
+
+.rodape {
+    background-color: #6b8490;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+    /* <-- SEGUNDA PARTE DO AJUSTE */
+}
+
+.rodape-conteudo p {
+    margin: 4px 0;
+}
+
+.redes-sociais img {
+    width: 24px;
+    margin: 0 5px;
+}
+
+.redes-sociais {
+    margin: 8px 0;
+}

@@ -30,16 +30,22 @@
 
         <form class="form-simples">
             <label>Nome</label>
-            <input type="text" placeholder="Digite o nome da ONG" required>
+            <input id="nome" type="text" placeholder="Digite o nome da ONG" required>
 
             <label>CNPJ</label>
-            <input type="text" placeholder="00.000.000/0000-00" required>
+            <input id="cnpj" type="text" placeholder="00.000.000/0000-00" required>
 
             <label>Área de atuação</label>
-            <input type="text" placeholder="Ex: Educação, Saúde..." required>
+            <input id="atuacao" type="text" placeholder="Ex: Educação, Saúde..." required>
 
             <label>Contato</label>
-            <input type="text" placeholder="(00) 00000-0000" required>
+            <input id="contato" type="text" placeholder="(00) 00000-0000" required>
+
+            <label>Email</label>
+            <input id="email" type="email" placeholder="exemplo@email.com">
+
+            <label>Senha</label>
+            <input id="senha" type="password" placeholder="Crie uma senha">
 
             <button type="submit">Cadastrar</button>
         </form>
@@ -51,29 +57,46 @@
     </footer>
 
     <script>
-        document.getElementById("form-ong").addEventListener("submit", async (event) => {
+
+        document.getElementById("form-simples").addEventListener("submit", function (event) {
             event.preventDefault();
+
             const nome = document.getElementById("nome").value;
             const cnpj = document.getElementById("cnpj").value;
-            const area_atuacao = document.getElementById("area_atuacao").value;
+            const atuacao = document.getElementById("atuacao").value;
+            const contato = document.getElementById("contato").value;
             const email = document.getElementById("email").value;
             const senha = document.getElementById("senha").value;
-            const contato = document.getElementById("contato").value;
 
-            const resposta = await fetch("http://localhost:3000/ongsCriar", {
+            fetch("http://localhost:3000/ongsCriar", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nome, cnpj, area_atuacao, email, senha, contato })
-            });
-
-            if (resposta.ok) {
-                alert("ONG cadastrada com sucesso!");
-                window.location.href = "../view/login.html";
-            } else {
-                alert("Erro ao cadastrar ONG");
-            }
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    cnpj: cnpj,
+                    atuacao: atuacao,
+                    contato: contato,
+                    email: email,
+                    senha: senha
+                }),
+                credentials: "include"
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        alert("Usuário cadastrado com sucesso!");
+                        window.location.href = "../view/login.html";
+                    } else {
+                        alert("Erro ao cadastrar ONG");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na requisição:", error);
+                });
         });
     </script>
+
 
 </body>
 

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade</title>
+    <link rel="stylesheet" href="/css/comunidade.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/imgs/banner-logo/CONECTA+.png" alt="Logo Conecta+">
+            </a>
+        </div>
+
+        <nav class="menu">
+            <a href="/index.html">Início</a>
+            <a href="/pag-perfil/index.html">Meu Perfil</a>
+            <a href="/pag-sobrenos/index.html">Sobre Nós</a>
+        </nav>
+    </header>
+
+    <!-- SEÇÃO DOS RELATOS -->
+    <section class="secao-relatos">
+
+        <h2>RELATOS DA COMUNIDADE</h2>
+
+        <!-- DROPDOWN -->
+        <div class="dropdown">
+            <button class="dropdown-button" onclick="toggleDropdown()">Tipos de conteúdo</button>
+
+            <ul class="dropdown-menu" id="dropdownMenu">
+                <li><a href="#">Denúncia</a></li>
+                <li><a href="#">Perigos</a></li>
+                <li><a href="#">Sobre o bairro</a></li>
+            </ul>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards-container">
+
+            <!-- CARD 1 -->
+            <div class="card-relato">
+                <h4>Ana Carolina Quirino</h4>
+                <small><strong>Rio Vermelho 12/02/25</strong></small>
+
+                <img src="/imgs/alagamento.png" alt="Alagamento">
+
+                <p>
+                    O bairro tem sofrido com muitos alagamentos, o que tem dificultado a passagem dos moradores.
+                </p>
+
+                <div class="acoes-relato">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                    <button>Compartilhar</button>
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="card-relato">
+                <h4>Leticya Dias</h4>
+                <small><strong>Rio Vermelho 14/01/24</strong></small>
+
+                <img src="/imgs/rua.png" alt="Rua escura">
+
+                <p>
+                    As ruas são muito estreitas e há pouca iluminação, causando sensação de insegurança.
+                </p>
+
+                <div class="acoes-relato">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                    <button>Compartilhar</button>
+                </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="card-relato">
+                <h4>Geovanna Campos</h4>
+                <small><strong>Rio Vermelho 04/09/24</strong></small>
+
+                <img src="/imgs/onibus.png" alt="Ônibus">
+
+                <p>
+                    Peguei um ônibus Costa do Mocangibí no terminal TICAN às 20h e tive que andar tudo de volta.
+                </p>
+
+                <div class="acoes-relato">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                    <button>Compartilhar</button>
+                </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="card-relato">
+                <h4>Maiara Lima</h4>
+                <small><strong>Rio Vermelho 06/02/25</strong></small>
+
+                <img src="/imgs/ruaperigo.png" alt="Rua perigosa">
+
+                <p>
+                    Algumas áreas do Rio Vermelho são perigosas, e havia venda de drogas perto da minha casa.
+                </p>
+
+                <div class="acoes-relato">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                    <button>Compartilhar</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTÃO ENVIAR RELATO -->
+        <div class="enviar-relato">
+            <a href="/pag-relatos/index.html">ENVIAR RELATO</a>
+        </div>
+
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
+            <p><strong>Telefone:</strong> (48) 3239-5801</p>
+
+            <div class="redes-sociais">
+                <a href="https://wa.me/554832395801" target="_blank">
+                    <img src="/imgs/icons/whats.svg" alt="WhatsApp">
+                </a>
+                <a href="https://facebook.com" target="_blank">
+                    <img src="/imgs/icons/face.svg" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="/imgs/icons/insta.svg" alt="Instagram">
+                </a>
+            </div>
+
+            <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("show");
+        }
+
+        // Fecha o dropdown ao clicar fora
+        window.onclick = function (e) {
+            if (!e.target.matches(".dropdown-button")) {
+                document.getElementById("dropdownMenu").classList.remove("show");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

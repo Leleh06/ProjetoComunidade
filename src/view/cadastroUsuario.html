@@ -28,19 +28,19 @@
 
         <h1>Cadastro de Usuário</h1>
 
-        <form class="form-simples">
+        <form id="form-simples" class="form-simples">
 
             <label>Nome</label>
-            <input type="text" placeholder="Digite seu nome completo">
+            <input id="nome" type="nome" placeholder="Digite seu nome completo">
 
             <label>Bairro</label>
-            <input type="text" placeholder="Digite seu bairro">
+            <input id="bairro" type="bairro" placeholder="Digite seu bairro">
 
             <label>Email</label>
-            <input type="email" placeholder="exemplo@email.com">
+            <input id="email" type="email" placeholder="exemplo@email.com">
 
             <label>Senha</label>
-            <input type="password" placeholder="Crie uma senha">
+            <input id="senha" type="password" placeholder="Crie uma senha">
 
             <button type="submit">Cadastrar</button>
         </form>
@@ -53,26 +53,39 @@
 
 
     <script>
-        document.getElementById("form-simples").addEventListener("submit", async (event) => {
-            event.preventDefault();
+    
+        document.getElementById("form-simples").addEventListener("submit", function (event) {
+            event.preventDefault(); 
 
             const nome = document.getElementById("nome").value;
             const bairro = document.getElementById("bairro").value;
             const email = document.getElementById("email").value;
             const senha = document.getElementById("senha").value;
 
-            const resposta = await fetch("http://localhost:3000/createUser", {
+            fetch("http://localhost:3000/usuarioCriar", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nome, bairro, email, senha })
-            });
-
-            if (resposta.ok) {
-                alert("Usuário cadastrado com sucesso!");
-                window.location.href = "../view/login.html";
-            } else {
-                alert("Erro ao cadastrar usuário");
-            }
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    bairro: bairro,
+                    email: email,
+                    senha: senha
+                }),
+                  credentials: "include"
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        alert("Usuário cadastrado com sucesso!");
+                        window.location.href = "../view/login.html";
+                    } else {
+                        alert("Erro ao cadastrar usuário");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na requisição:", error);
+                });
         });
     </script>
 
