@@ -10,7 +10,6 @@ const curtir = async (ongLike_id, userLike_id) =>{
     return curtidaCriada;
 };
 
-
 const mostrarLike = async (ongLike_id, userLike_id) =>{
     const [results] = await db.query(
         'SELECT count(*) FROM curtitOng WHERE ongLike_id=? and userLike_id=?',

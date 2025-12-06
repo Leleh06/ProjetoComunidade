@@ -17,20 +17,19 @@ const listarRelato = async() =>{
     return results;
 }
 // atualizar relato
-const atualizarRelato = async(nome, categoria, descricao) => {
+const atualizarRelato = async(nome, categoria, descricao,id) => {
     const [results] = await db.query(
-        'UPDATE post SET `nome`=?, `categoria`=?, `descricao`=?', [nome, categoria, descricao]);
+        'UPDATE post SET nome = COALESCE(?, nome), categoria = COALESCE(?, categoria), descricao = COALESCE(?, descricao) WHERE id_post=?',
+         [nome, categoria, descricao,id]);
     const [relatoAtualizado] = await db.query(
-        'SELECT * FROM post WHERE id_post=?', results.insertId);
+        'SELECT * FROM post WHERE id_post=?', [id]);
     return relatoAtualizado
 };
 // deletar relato
 const deletarRelato = async(id) => {
     const [results] = await db.query(
         'DELETE FROM post WHERE id_post=?', id);
-    const [relatoDeletado] = await db.query(
-        'SELECT * FROM post WHERE id_post=?', results.insertId);
-    return relatoDeletado
+    return results
 };
 
 export {relato, listarRelato, atualizarRelato, deletarRelato};
