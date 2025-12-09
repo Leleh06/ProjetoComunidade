@@ -34,7 +34,7 @@
                 <div class="col">
                     <label for="nome">Nome (opcional)</label>
                     <input type="text" id="nome" placeholder="Seu nome">
-
+                    
                     <label for="categoria">Categoria</label>
                      <select id="categoria" aria-placeholder="Categoria">
                       <option>Perigo</option>
@@ -71,26 +71,46 @@
 
     
     <script>
-        document.getElementById('form-relato').addEventListener('submit', function (event) {
-            event.preventDefault();
+        // document.getElementById('form-relato').addEventListener('submit', function (event) {
+            // event.preventDefault();
 
-            const payload = {
-                nome: nome.value,
-                categoria: categoria.value,
-                descriçaõ: descricao.value,
-                foto: foto.value,
-                video: video.value
-            };
+            // const payload = {
+                // nome: nome.value,
+                // categoria: categoria.value,
+                // descriçaõ: descricao.value,
+                // foto: foto.value,
+                // video: video.value
+            // };
 
-            fetch('http://localhost:3000/relatoCriar', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-                .then(res => res.json())
-                .then(data => console.log('Sucesso:', data))
-                .catch(err => console.error('Erro:', err));
-        });
+            // fetch('http://localhost:3000/relatoCriar', {
+                // method: 'POST',
+                // headers: { 'Content-Type': 'application/json' },
+                // body: JSON.stringify(payload)
+            // })
+                // .then(res => res.json())
+                // .then(data => console.log('Sucesso:', data))
+                // .catch(err => console.error('Erro:', err));
+        // });
+
+
+        const url = "http://localhost:3000/relatoCriar";
+        fecth(url, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(res, res.json())
+        .then(data =>{
+            console.log(data);
+            if(data){
+                for(let i=0; i<data.length; i++){
+                    const element= data[id];
+
+                    html +=
+                }
+            }
+        })
 
     </script>
 
