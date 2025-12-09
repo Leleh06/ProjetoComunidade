@@ -16,7 +16,7 @@
             </a>
         </div>
         <nav class="nav">
-            <a href="../view/login.html">Meu Perfil</a>
+            <a href="../view/meuPerfil.html">Meu Perfil</a>
             <!-- <a href="/pagina-cadastro/index.html">Cadastrar</a> -->
              
         </nav>
@@ -35,8 +35,8 @@
         </div>
 
         <h3>Últimos relatos publicados</h3>
-        <div class="cards">
-            <div class="card">
+        <div class="cards" id="cards">
+            <!-- <div class="card">
                 <img src="https://placehold.co/200" alt="">
                 <h5>Título do relato</h5>
                 <p>Relatos da pessoa</p>
@@ -55,7 +55,7 @@
                 <h5>Título do relato</h5>
                 <p>Relatos da pessoa</p>
                 <a href="#" class="link">Ver mais</a>
-            </div>
+            </div> -->
         </div>
 
         <h3>ONGs em destaque</h3>
@@ -77,6 +77,41 @@
 
         <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
     </footer>
+
+
+
+    <script>
+    //    aparecer post de relatos
+
+    const url = "http://localhost:3000/relatoListar";
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("O que vem dentro do data???", data);
+
+        let html = ``;
+        if(data) {
+            for(let i=0; i < data.length; i++){
+                const element = data[i] ;
+    
+                html += `<div class="card">
+                    <img src="https://placehold.co/200" alt="">
+                    <h5>${element.titulo}</h5>
+                    <p>${element.descricao}</p>
+                    <a href="#" class="link">Ver mais</a>
+                </div>`;
+            }
+        }
+        document.getElementById("cards").innerHTML = html;
+    })
+    .catch(erro => console.log("Ocorreu um erro: ", erro))
+
+    </script>
 </body>
 
 </html>
