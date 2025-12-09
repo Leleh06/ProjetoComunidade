@@ -150,3 +150,43 @@ body.sobre-nos {
     text-align: center;
     font-size: 15px;
 }
+
+
+/* Container do formulário */
+form {
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  /* Label */
+  label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #3b3b3b;
+    display: block;
+    margin-bottom: 6px;
+  }
+  
+  /* Estilo do select */
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background-color: #f4e8df; /* bege claro */
+    border: 1px solid #c2b3a4; /* bege mais escuro */
+    font-size: 15px;
+    color: #333;
+    outline: none;
+  }
+  
+  /* Hover e foco */
+  select:hover {
+    background-color: #efe2d7;
+  }
+  
+  select:focus {
+    border-color: #7c8c94; /* azul acinzentado do botão PUBLICAR */
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(124, 140, 148, 0.6);
+  }
+  
