@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/publicar.css">
+    <title>Conecta+</title>
+</head>
+
+<body>
+    <header class="topo">
+        <div class="logo">
+            <a href="../view/inicio.html">
+                <img src="/imgs/Logo-CONECTA.png" alt="Logo Conecta+">
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="../view/inicio2.html">Início</a>
+            <a href="../view/comunidade.html">Comunidade</a>
+            <a href="../view/meuPerfil.html">Perfil</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="box">
+
+            <div class="tabs">
+                <button>Texto</button>
+                <button>Vídeo</button>
+            </div>
+
+            <div class="form-relato">
+                <div class="col">
+                    <label for="nome">Nome (opcional)</label>
+                    <input type="text" id="nome" placeholder="Seu nome">
+                    
+                    <label for="categoria">Categoria</label>
+                     <select id="categoria" aria-placeholder="Categoria">
+                      <option>Perigo</option>
+                      <option>Denuncia</option>
+                      <option>Sobre o Bairro</option>
+                     </select>
+                </div>
+
+                <div class="col2">
+                    <textarea placeholder="Escreva seu relato aqui..."></textarea>
+                    <div class="termos">termos de uso</div>
+                </div>
+            </div>
+
+            <button class="btn-pub">
+                <a class="plc" href="../view/relatos.html">PUBLICAR</a>
+            </button>
+
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC</p>
+        <p><strong>Telefone:</strong> (48) 3239-5801</p>
+
+        <div class="social">
+            <a href="https://wa.me/554832395801" target="_blank"><img src="/imgs/icons/whats.svg"></a>
+            <a href="https://facebook.com" target="_blank"><img src="/imgs/icons/face.svg"></a>
+            <a href="https://instagram.com" target="_blank"><img src="/imgs/icons/insta.svg"></a>
+        </div>
+
+        <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
+    </footer>
+
+    
+    <script>
+        // document.getElementById('form-relato').addEventListener('submit', function (event) {
+            // event.preventDefault();
+
+            // const payload = {
+                // nome: nome.value,
+                // categoria: categoria.value,
+                // descriçaõ: descricao.value,
+                // foto: foto.value,
+                // video: video.value
+            // };
+
+            // fetch('http://localhost:3000/relatoCriar', {
+                // method: 'POST',
+                // headers: { 'Content-Type': 'application/json' },
+                // body: JSON.stringify(payload)
+            // })
+                // .then(res => res.json())
+                // .then(data => console.log('Sucesso:', data))
+                // .catch(err => console.error('Erro:', err));
+        // });
+
+
+        const url = "http://localhost:3000/relatoCriar";
+        fecth(url, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        .then(res, res.json())
+        .then(data =>{
+            console.log(data);
+            if(data){
+                for(let i=0; i<data.length; i++){
+                    const element= data[id];
+
+                    html +=
+                }
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>

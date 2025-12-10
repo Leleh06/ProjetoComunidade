@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de ONG</title>
+    <link rel="stylesheet" href="/css/cadastro.css">
+</head>
+
+<body>
+
+    <header class="topo">
+        <div class="logo">
+            <a href="../view/inicio.html">
+                <img src="/imgs/banner-logo/CONECTA+.png" alt="Logo Conecta+">
+            </a>
+        </div>
+
+        <nav class="nav">
+            <a href="../view/inicio.html">Início</a>
+            <a href="../view/sobreNos.html">Sobre nós</a>
+            <a href="../view/login.html">Login</a>
+        </nav>
+    </header>
+
+    <main class="area-form">
+
+        <h1>Cadastro de ONG</h1>
+
+        <form class="form-simples">
+            <label>Nome</label>
+            <input id="nome" type="text" placeholder="Digite o nome da ONG" required>
+
+            <label>CNPJ</label>
+            <input id="cnpj" type="text" placeholder="00.000.000/0000-00" required>
+
+            <label>Área de atuação</label>
+            <input id="atuacao" type="text" placeholder="Ex: Educação, Saúde..." required>
+
+            <label>Contato</label>
+            <input id="contato" type="text" placeholder="(00) 00000-0000" required>
+
+            <label>Email</label>
+            <input id="email" type="email" placeholder="exemplo@email.com">
+
+            <label>Senha</label>
+            <input id="senha" type="password" placeholder="Crie uma senha">
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+    </main>
+
+    <footer class="rodape">
+        <p>© 2025 Conecta+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+
+        document.getElementById("form-simples").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const cnpj = document.getElementById("cnpj").value;
+            const atuacao = document.getElementById("atuacao").value;
+            const contato = document.getElementById("contato").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            fetch("http://localhost:3000/ongsCriar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nome: nome,
+                    cnpj: cnpj,
+                    atuacao: atuacao,
+                    contato: contato,
+                    email: email,
+                    senha: senha
+                }),
+                credentials: "include"
+            })
+                .then(resposta => {
+                    if (resposta.ok) {
+                        alert("Usuário cadastrado com sucesso!");
+                        window.location.href = "../view/login.html";
+                    } else {
+                        alert("Erro ao cadastrar ONG");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na requisição:", error);
+                });
+        });
+    </script>
+
+
+</body>
+
+</html>

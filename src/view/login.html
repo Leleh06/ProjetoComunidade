@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div class="logo">
+            <a href="../view/inicio.html">
+                <img src="/imgs/Logo-CONECTA.png" alt="Logo Conecta+">
+            </a>
+        </div>
+        <nav class="menu">
+            <a href="../view/inicio.html">Início</a>
+            <a href="../view/cadastroUsuario.html">Cadastrar-se</a>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <div class="form-section">
+            <h2>Bem-Vindo!</h2>
+            <label for="email">email:</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu email">
+
+            <label for="senha">senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+
+            <div class="botao">
+                <button type="submit" class="login-button">ENTRAR Usuário</button>
+                <button type="submit" class="login-button-ong">ENTRAR ONG</button>
+
+                <a class="signup-link" href="../view/cadastroUsuario.html">Não tem conta? Cadastre-se Usuário</a>
+                <a class="signup-link" href="../view/cadastroONG.html">Cadastre-se ONG</a>
+            </div>
+        </div>
+
+
+
+        <div class="right-section">
+            <img src="/imgs/logocont.png" alt="logo">
+            <div class="slogan">"Escute. Compartilhe. Transforme."</div>
+
+        </div>
+    </div>
+
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
+            <p><strong>Telefone:</strong> (48) 3239-5801</p>
+            <div class="redes-sociais">
+                <a href="https://wa.me/554832395801" target="_blank">
+                    <img src="/imgs/icons/whats.svg" alt="WhatsApp">
+                </a>
+                <a href="https://facebook.com" target="_blank">
+                    <img src="/imgs/icons/face.svg" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="/imgs/icons/insta.svg" alt="Instagram">
+                </a>
+            </div>
+            <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
+        </div>
+    </footer>
+
+
+    <script>
+        // LOGIN USUÁRIO
+        document.getElementById("login-button")?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            const resposta = await fetch("http://localhost:3000/usuarioLogar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    email: email, 
+                    senha: senha
+                 }),
+                credentials: "include"
+            });
+
+            if (resposta.ok) {
+                window.location.href = "../view/meuPerfil.html";
+            } else {
+                alert("Email ou senha inválidos (usuário)");
+            }
+        });
+
+        // LOGIN ONG
+        document.getElementById("login-button-ong")?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            const resposta = await fetch("http://localhost:3000/ongsLogar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    email: email, 
+                    senha: senha
+                 }),
+
+                credentials: "include"
+            });
+
+            if (resposta.ok) {
+                window.location.href = "../view/meuPerfil.html";
+            } else {
+                alert("Email ou senha inválidos (ONG)");
+            }
+        });
+    </script>
+</body>
+
+</html>

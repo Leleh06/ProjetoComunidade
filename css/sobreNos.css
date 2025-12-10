@@ -1,0 +1,192 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.sobre-nos {
+    background-color: #E3D5CA;
+    font-family: "Nunito", sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+.cabecalho {
+    width: 100%;
+    background: #d5bdaf;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.menu a:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+
+.missao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 40px;
+    gap: 40px;
+    flex-wrap: wrap;
+    background-color: #E3D5CA;
+}
+
+.texto-missao {
+    max-width: 500px;
+}
+
+.texto-missao h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.texto-sobrenos p {
+    color: #333;
+}
+
+.video img {
+    width: 450px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+}
+
+.legenda {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+
+.equipe {
+    padding: 60px 40px;
+    text-align: center;
+    background-color: #E3D5CA;
+}
+
+.titulo {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 35px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #d5bdaf;
+    padding: 20px;
+    border-radius: 12px;
+    width: 180px;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.parceiros {
+    padding: 60px 40px;
+    text-align: center;
+    background-color: #E3D5CA;
+}
+
+/* .parceiros .card {
+    width: 150px;
+} */
+
+.rodape {
+    background: #6b8490; 
+    padding: 25px;
+    margin-top: 40px;
+}
+
+.rodape-conteudo {
+    text-align: center;
+    font-size: 15px;
+}
+
+
+/* Container do formulário */
+form {
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  /* Label */
+  label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #3b3b3b;
+    display: block;
+    margin-bottom: 6px;
+  }
+  
+  /* Estilo do select */
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background-color: #f4e8df; /* bege claro */
+    border: 1px solid #c2b3a4; /* bege mais escuro */
+    font-size: 15px;
+    color: #333;
+    outline: none;
+  }
+  
+  /* Hover e foco */
+  select:hover {
+    background-color: #efe2d7;
+  }
+  
+  select:focus {
+    border-color: #7c8c94; /* azul acinzentado do botão PUBLICAR */
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(124, 140, 148, 0.6);
+  }
+  
