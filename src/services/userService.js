@@ -61,7 +61,9 @@ const atualizarUser = async (nome, bairro, email, senha, id) => {
 // const deletarUser
 const deletarUser = async (id) => {
     const [results] = await db.query(
-        'DELETE FROM usuario WHERE id_usuario=?',[id]);
+        'DELETE FROM usuario WHERE id_usuario=?',
+        [id]
+    );
 
     return results
 }

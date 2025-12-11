@@ -87,6 +87,7 @@ body {
     background-color: #6b8490;
     padding: 20px;
     text-align: center;
+<<<<<<< HEAD
     margin-top: auto;
     /* <-- SEGUNDA PARTE DO AJUSTE */
 }
@@ -102,4 +103,24 @@ body {
 
 .redes-sociais {
     margin: 8px 0;
+=======
+    background: #6b8490;
+}
+
+
+
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Aqui você coloca a classe da ÁREA PRINCIPAL da página */
+.area-form {
+    flex: 1;
+}
+
+.rodape {
+    margin-top: auto;
+>>>>>>> 02df04aa48c234ac7b3f7c7ba421dc8fd8032a47
 }

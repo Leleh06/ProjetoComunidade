@@ -1,0 +1,79 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Cabeçalho */
+.topo {
+  background-color: #d5bdaf;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+.topo .logo img {
+  height: 50px;
+}
+
+.topo .menu a {
+  color: #333;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.topo .menu a:hover {
+  text-decoration: underline;
+}
+
+/* Conteúdo */
+.conteudo {
+  background-color: #E3D5CA;
+  min-height: 70vh;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.lista-ongs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Card de ONG */
+.ong-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.ong-card h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.ong-card p {
+  margin: 6px 0;
+  color: #555;
+}
+
+/* Rodapé */
+.rodape {
+  background-color: #6b8490;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+
+.rodape p {
+  margin: 5px 0;
+}
