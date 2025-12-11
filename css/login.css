@@ -1,192 +1,209 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color:  #E3D5CA;
-  }
-  
-  
-  .cabecalho {
-    background-color: #D5BDAF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Logo (imagem menor e alinhada) */
-  .cabecalho .logo img {
-    height: 60px;
-    width: auto;
-  }
-  
-  /* Menu */
-  .menu {
-    display: flex;
-    gap: 25px;
-  }
-  
-  .menu a {
-    color: #393541;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    transition: color 0.3s;
-  }
-  
-  .menu a:hover {
-    color: #ffff;
-    /* cor ao passar o mouse */
-  }
-  
-  .login-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px auto;
-    padding: 10px;
-    background-color: #E3D5CA;
-  }
-  
-  .form-section {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    padding: 110px;
-    align-items: center; /* CENTRALIZA tudo */
-  }
-  
-  
-  .form-section h1 {
-    margin-bottom: 30px;
-    color: #000;
-    font-size: 26px;
-  }
-  
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #000;
-  }
-  
-  input[type="email"],
-  input[type="password"] {
-    width: 350px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    background-color: #fff;
-    border-radius: 8px;
-  }
-  
-  .right-section {
-    width: 45%;
-    text-align: center;
-  }
-  
-  .icon-placeholder {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #3d3d3d;
-    margin: 0 auto 20px;
-    position: relative;
-  }
-  
-  .icon-placeholder::after {
-    content: "👥";
-    font-size: 64px;
-    color: #c48e67;
-    position: absolute;
-    top: 40px;
-    left: 45px;
-  }
-  
-  .slogan {
-    font-weight: bold;
-    margin: 15px 0;
-  }
-  
-  .botao {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* CENTRALIZA */
-    justify-content: center;
-    width: 100%;
-    margin-top: 20px;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color:  #E3D5CA;
+}
+
+
+.cabecalho {
+  background-color: #D5BDAF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo (imagem menor e alinhada) */
+.cabecalho .logo img {
+  height: 60px;
+  width: auto;
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  color: #393541;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #ffff;
+  /* cor ao passar o mouse */
+}
+
+.login-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #E3D5CA;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 110px;
+  align-items: center; /* CENTRALIZA tudo */
+}
+
+.form-section h1 {
+  margin-bottom: 30px;
+  color: #000;
+  font-size: 26px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 350px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.right-section {
+  width: 45%;
+  text-align: center;
+}
+
+.icon-placeholder {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #3d3d3d;
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+.icon-placeholder::after {
+  content: "👥";
+  font-size: 64px;
+  color: #c48e67;
+  position: absolute;
+  top: 40px;
+  left: 45px;
+}
+
+.slogan {
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.botao {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* CENTRALIZA */
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .login-button {
-    background-color: #556c78;
-    color: white;
-    border: none;
-    padding: 12px 40px;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: auto; /* IMPORTANTE: evita ficar gigante */
-    text-align: center;
+  background-color: #556c78;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: auto;
+  text-align: center;
 }
 
 .login-button-ong {
-    background-color: #556c78;
-    color: white;
-    border: none;
-    padding: 12px 40px;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 20px;
-    width: auto; /* IMPORTANTE: evita ficar gigante */
-    text-align: center;
+  background-color: #556c78;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: auto;
+  text-align: center;
 }
 
 .login-button a {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
-  
-  .signup-link {
-    display: flex;
-    margin-top: 10px;
-    font-size: 0.85em;
-    color: #222;
-  }
-  
-  .ent {
-    color: aliceblue;
-    text-decoration: none;
-  }
-  
-  .rodape {
-    background-color: #6b8490;
-    color: black;
-    text-align: center;
-    padding: 20px 10px;
-    font-size: 14px;
-  }
-  
-  .rodape-conteudo p {
-    margin: auto;
-    line-height: 1.5;
-  }
-  
-  .redes-sociais {
-    margin: 10px 0;
-  }
-  
-  .redes-sociais img {
-    width: 20px;
-    /* ou 20px se quiser ainda menor */
-    height: auto;
-    margin: 0 8px;
-    vertical-align: middle;
-  }
-  
-  .redes-sociais a:hover {
-    transform: scale(1.2);
-  }
+
+.signup-link {
+  display: flex;
+  margin-top: 10px;
+  font-size: 0.85em;
+  color: #222;
+}
+
+.ent {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.rodape {
+  background-color: #6b8490;
+  color: black;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 14px;
+}
+
+.rodape-conteudo p {
+  margin: auto;
+  line-height: 1.5;
+}
+
+.redes-sociais {
+  margin: 10px 0;
+}
+
+.redes-sociais img {
+  width: 20px;
+  height: auto;
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.redes-sociais a:hover {
+  transform: scale(1.2);
+}
+
+
+
+/* Faz o body ocupar toda a altura da tela */
+html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Faz o conteúdo ocupar o espaço e empurra o rodapé */
+.login-container {
+  flex: 1;
+}
+
+/* Rodapé sempre no final */
+.rodape {
+  margin-top: auto;
+}
