@@ -3,23 +3,23 @@ import * as ongService from '../services/ongService.js'
 // Criar no site
 export const createONG = async (req, res) => {
     try {
-        const { body } = req;
-        if (!body.nome || !body.cnpj || !body.area_atuacao || !body.email || !body.senha || !body.contato) {
-            return res.status(400).json({ message: "Campos obrigatórios faltando" });
-        };
+        const { nome, cnpj, area_atuacao, email, senha, contato } = req.body;
 
-        const ongCriada = await ongService.createONG(body.nome, body.cnpj, body.area_atuacao, body.email, body.senha, body.contato);
-        console.log(ongCriada);
-        if (ongCriada) {
-            return res.status(201).json({ message: "Ong criada com sucesso!", data: ongCriada });
-        } else {
-            return res.status(400).json({ message: "Não foi possível criar a Ong" });
-        };
+        if (!nome || !cnpj || !area_atuacao || !email || !senha || !contato) {
+            return res.status(400).json({ message: "Campos obrigatórios faltando" });
+        }
+
+        const ongCriada = await ongService.createONG(nome, cnpj, area_atuacao, email, senha, contato);
+        return res.status(201).json({ message: "Ong criada com sucesso!", data: ongCriada });
     } catch (error) {
+        if (error.code === "ER_DUP_ENTRY") {
+            return res.status(400).json({ message: "CNPJ já cadastrado." });
+        }
         console.log(error);
         return res.status(400).json({ message: "Não foi possível criar a Ong, tente novamente" });
     }
-}
+};
+
 
 // Logar Ong
 // export const logarONG = async(req, res) => {

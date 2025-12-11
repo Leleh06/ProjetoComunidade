@@ -1,100 +1,176 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu perfil</title>
+    <title>Meu Perfil</title>
     <link rel="stylesheet" href="/css/perfil.css">
 </head>
 
 <body>
 
-    <header class="cabecalho">
+    <header class="topo">
         <div class="logo">
-            <a href="/index.html">
+            <a href="../view/inicio2.html">
                 <img src="/imgs/banner-logo/CONECTA+.png" alt="Logo Conecta+">
             </a>
         </div>
+
+        <h1>Meu Perfil</h1>
+
         <nav class="menu">
-            <a href="/src/view/inicio.html">Início</a>
-            <a href="/src/view/comunidade.html">Comunidade</a>
-            <a href="/src/view/sobreNos.html">Sobre nós</a>
+            <a href="../view/inicio.html">Início</a>
+            <a href="../view/comunidade.html">Comunidade</a>
+            <a href="../view/meusRelatos.html">Meus Relatos</a>
         </nav>
     </header>
 
-    <main class="usuario-container">
+    <main class="conteudo">
+        <div class="perfil-card" id="perfil-card">
+            <!-- Dados do perfil serão carregados aqui -->
+        </div>
 
-        <section class="perfil-completo">
-            <div class="lado-esquerdo">
-                <img src="/imgs/imagem-perfil.png" alt="Foto de Perfil" class="foto-perfil">
-                <button class="btn" onclick="logout()">Sair</button>
-            </div>
-
-            <div class="lado-direito">
-                <h2 id="perfil-nome">Nome</h2>
-
-                <p><strong>Email:</strong> <span id="perfil-email"></span></p>
-                <p id="perfil-bairro"></p>
-                <p id="perfil-area"></p>
-                <p id="perfil-cnpj"></p>
-                <p><strong>Contato:</strong> <span id="perfil-contato"></span></p>
-
-                <div class="botoes">
-                    <a class="btn" href="/src/view/relatos.html">Meus relatos</a>
-                    <a class="btn" href="#">Editar Perfil</a>
-                    <a class="btn" href="#">Deletar Conta</a>
-                </div>
-            </div>
-        </section>
-
+        <div class="acoes">
+            <button onclick="editarPerfil()">Editar Perfil</button>
+            <button onclick="deletarConta()">Deletar Conta</button>
+            <button onclick="logout()">Sair</button>
+        </div>
     </main>
 
     <footer class="rodape">
-        <div class="rodape-conteudo">
-            <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
-            <p><strong>Telefone:</strong> (48) 3239-5801</p>
-        </div>
+        <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
+        <p><strong>Telefone:</strong> (48) 3239-5801</p>
+        <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
     </footer>
 
     <script>
         function carregarPerfil() {
             const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
             const ong = JSON.parse(localStorage.getItem("ongLogada"));
+            const card = document.getElementById("perfil-card");
 
-            const data = usuario || ong;
+            if (usuario) {
+                card.innerHTML = `
+          <p><strong>Nome:</strong> ${usuario.nome}</p>
+          <p><strong>Email:</strong> ${usuario.email}</p>
+          <p><strong>Bairro:</strong> ${usuario.bairro || "Não informado"}</p>
+          <p><strong>Descrição:</strong> ${usuario.descricao || "Sem descrição"}</p>
+          <p><strong>ID:</strong> ${usuario.id_user || "ID não encontrado"}</p>
+        `;
+            } else if (ong) {
+                card.innerHTML = `
+          <p><strong>Nome ONG:</strong> ${ong.nome}</p>
+          <p><strong>Email:</strong> ${ong.email}</p>
+          <p><strong>Área de atuação:</strong> ${ong.area_atuacao || "Não informado"}</p>
+          <p><strong>Descrição:</strong> ${ong.descricao || "Sem descrição"}</p>
+        `;
+            } else {
+                card.innerHTML = "<p>Nenhum perfil encontrado. Faça login novamente.</p>";
+            }
+        }
 
-            if (!data) {
-                window.location.href = "../view/login.html";
+        async function deletarConta() {
+            const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+            const ong = JSON.parse(localStorage.getItem("ongLogada"));
+
+            if (!confirm("Tem certeza que deseja excluir sua conta?")) return;
+
+            try {
+                let resposta;
+                if (usuario && usuario.id_user) {
+                    resposta = await fetch(`http://localhost:3000/usuarioLDelet/${usuario.id_user}`, {
+                        method: "DELETE"
+                    });
+                } else if (ong && ong.id_ong) {
+                    resposta = await fetch(`http://localhost:3000/ongsDelete/${ong.id_ong}`, {
+                        method: "DELETE"
+                    });
+                } else {
+                    alert("ID não encontrado. Faça login novamente.");
+                    return;
+                }
+
+                const resultado = await resposta.json();
+                alert(resultado.message);
+
+                localStorage.clear();
+                window.location.href = "login.html";
+            } catch (error) {
+                console.error("Erro ao deletar conta:", error);
+                alert("Erro ao deletar conta.");
+            }
+        }
+
+        async function editarPerfil() {
+            const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+            const ong = JSON.parse(localStorage.getItem("ongLogada"));
+
+            const novoNome = prompt("Novo nome:");
+            const novoEmail = prompt("Novo email:");
+            const novaDescricao = prompt("Nova descrição:");
+
+            if (!novoNome || !novoEmail) {
+                alert("Preencha os campos corretamente.");
                 return;
             }
 
-            document.getElementById("perfil-nome").textContent = data.nome || "";
-            document.getElementById("perfil-email").textContent = data.email || "";
-            document.getElementById("perfil-contato").textContent = data.contato || "";
+            try {
+                let resposta;
+                if (usuario && usuario.id_user) {
+                    resposta = await fetch(`http://localhost:3000/usuarioLUpdate/${usuario.id_user}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            nome: novoNome,
+                            email: novoEmail,
+                            descricao: novaDescricao
+                        })
+                    });
+                } else if (ong && ong.id_ong) {
+                    resposta = await fetch(`http://localhost:3000/ongsUpdate/${ong.id_ong}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            nome: novoNome,
+                            email: novoEmail,
+                            descricao: novaDescricao
+                        })
+                    });
+                } else {
+                    alert("ID não encontrado. Faça login novamente.");
+                    return;
+                }
 
-            if (data.bairro) {
-                document.getElementById("perfil-bairro").textContent = `Bairro: ${data.bairro}`;
-            }
+                const resultado = await resposta.json();
+                alert(resultado.message);
 
-            if (data.area_atuacao) {
-                document.getElementById("perfil-area").textContent = `Área de atuação: ${data.area_atuacao}`;
-            }
+                if (usuario) {
+                    usuario.nome = novoNome;
+                    usuario.email = novoEmail;
+                    usuario.descricao = novaDescricao;
+                    localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+                } else if (ong) {
+                    ong.nome = novoNome;
+                    ong.email = novoEmail;
+                    ong.descricao = novaDescricao;
+                    localStorage.setItem("ongLogada", JSON.stringify(ong));
+                }
 
-            if (data.cnpj) {
-                document.getElementById("perfil-cnpj").textContent = `CNPJ: ${data.cnpj}`;
+                carregarPerfil();
+            } catch (error) {
+                console.error("Erro ao editar perfil:", error);
+                alert("Erro ao editar perfil.");
             }
         }
 
         function logout() {
-            localStorage.removeItem("usuarioLogado");
-            localStorage.removeItem("ongLogada");
-            window.location.href = "../view/login.html";
+            localStorage.clear();
+            window.location.href = "login.html";
         }
 
         carregarPerfil();
     </script>
-
 
 </body>
 
