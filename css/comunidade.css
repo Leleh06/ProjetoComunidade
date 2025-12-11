@@ -122,7 +122,7 @@ section {
     gap: 20px;
     padding-left: 40px;
     padding-right: 40px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .card-relato {
