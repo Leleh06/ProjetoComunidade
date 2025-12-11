@@ -89,3 +89,20 @@ body {
     text-align: center;
     background: #6b8490;
 }
+
+
+
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Aqui você coloca a classe da ÁREA PRINCIPAL da página */
+.area-form {
+    flex: 1;
+}
+
+.rodape {
+    margin-top: auto;
+}

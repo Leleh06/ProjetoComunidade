@@ -195,14 +195,14 @@ section {
     background-color: #7492a1d1;
 }
 
-/* ======== RODAPÉ ======== */
+/*  RODAPE */
 
 .rodape {
     background-color: #6b8490;
     padding: 20px;
     text-align: center;
     margin-top: auto;
-    /* <-- SEGUNDA PARTE DO AJUSTE */
+    /* SEGUNDA PARTE DO AJUSTE */
 }
 
 .rodape-conteudo p {
