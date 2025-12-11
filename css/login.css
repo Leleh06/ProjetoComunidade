@@ -164,20 +164,24 @@ body {
   
   .rodape {
     background-color: #6b8490;
-    color: black;
+    padding: 20px;
     text-align: center;
-    padding: 20px 10px;
-    font-size: 14px;
-  }
-  
-  .rodape-conteudo p {
-    margin: auto;
-    line-height: 1.5;
-  }
-  
-  .redes-sociais {
-    margin: 10px 0;
-  }
+    margin-top: auto;
+    /* <-- SEGUNDA PARTE DO AJUSTE */
+}
+
+.rodape-conteudo p {
+    margin: 4px 0;
+}
+
+.redes-sociais img {
+    width: 24px;
+    margin: 0 5px;
+}
+
+.redes-sociais {
+    margin: 8px 0;
+}
   
   .redes-sociais img {
     width: 20px;

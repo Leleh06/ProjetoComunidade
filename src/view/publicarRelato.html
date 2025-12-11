@@ -9,30 +9,128 @@
 </head>
 
 <body>
-    <form id="form-relato" enctype="multipart/form-data">
-        <label for="nome">Nome (opcional)</label>
-        <input type="text" id="nome" name="nome">
+    <header class="cabecalho">
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/imgs/banner-logo/CONECTA+.png" alt="Logo Conecta+">
+            </a>
+        </div>
 
-        <label for="categoria">Categoria</label>
-        <select id="categoria" name="categoria" required>
-            <option value="Perigo">Perigo</option>
-            <option value="Denúncia">Denúncia</option>
-            <option value="Sobre o Bairro">Sobre o Bairro</option>
-        </select>
+        <nav class="menu">
+            <a href="/view/inicio.html">Início</a>
+            <a href="/view/comunidade.html">Comunidade</a>
+            <a href="/view/meuPerfil.html">Perfil</a>
+        </nav>
+    </header>
 
-        <label for="descricao">Descrição</label>
-        <textarea id="descricao" name="descricao" required></textarea>
+    <main>
+        <form id="form-relato" enctype="multipart/form-data">
 
-        <label for="foto">Foto</label>
-        <input type="file" id="foto" name="foto" accept="image/*">
+            <div class="coluna-esquerda">
+                <label for="nome">Nome (opcional)</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome">
 
-        <label for="video">Vídeo</label>
-        <input type="file" id="video" name="video" accept="video/*">
+                <label for="categoria">Categoria</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="" disabled selected>Categoria</option>
+                    <option value="Perigo">Perigo</option>
+                    <option value="Denúncia">Denúncia</option>
+                    <option value="Sobre o Bairro">Sobre o Bairro</option>
+                </select>
+            </div>
 
-        <button type="submit">PUBLICAR</button>
-    </form>
+
+            <div class="coluna-direita">
+                <div class="abas-container">
+                    <div id="aba-texto" class="aba ativa">Texto</div>
+                    <div id="aba-video" class="aba">Vídeo</div>
+                </div>
+
+                <div id="conteudo-relato" class="conteudo-relato">
+
+                    <div id="campo-texto" class="campo-ativo">
+                        <textarea id="descricao" name="descricao" placeholder="Escreva seu relato aqui..." required></textarea>
+                    </div>
+
+                    <div id="campo-video" class="campo-arquivo">
+                         <p>Selecione um arquivo de vídeo ou foto (Opcional).</p>
+
+                         <label for="foto">Foto:</label>
+                         <input type="file" id="foto" name="foto" accept="image/*">
+
+                         <label for="video">Vídeo:</label>
+                         <input type="file" id="video" name="video" accept="video/*">
+                    </div>
+                </div>
+
+                <a href="#" class="termos-de-uso">termos de uso</a>
+
+            </div>
+
+
+            <button type="submit">PUBLICAR</button>
+        </form>
+
+    </main>
+
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
+            <p><strong>Telefone:</strong> (48) 3239-5801</p>
+
+            <div class="redes-sociais">
+                <a href="https://wa.me/554832395801" target="_blank">
+                    <img src="/imgs/icons/whats.svg" alt="WhatsApp">
+                </a>
+                <a href="https://facebook.com" target="_blank">
+                    <img src="/imgs/icons/face.svg" alt="Facebook">
+                </a>
+                <a href="https://instagram.com" target="_blank">
+                    <img src="/imgs/icons/insta.svg" alt="Instagram">
+                </a>
+            </div>
+
+            <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
+        </div>
+    </footer>
+
 
     <script>
+        // Lógica para controle das abas (Texto/Vídeo)
+        const abaTexto = document.getElementById("aba-texto");
+        const abaVideo = document.getElementById("aba-video");
+        const campoTexto = document.getElementById("campo-texto");
+        const campoVideo = document.getElementById("campo-video");
+        const descricaoTextarea = document.getElementById("descricao");
+
+        function ativarAba(abaParaAtivar, campoParaMostrar, campoParaOcultar) {
+            // Atualiza as classes das abas
+            abaTexto.classList.remove("ativa");
+            abaVideo.classList.remove("ativa");
+            abaParaAtivar.classList.add("ativa");
+
+            // Alterna a exibição do conteúdo
+            campoTexto.style.display = 'none';
+            campoVideo.style.display = 'none';
+            campoParaMostrar.style.display = 'block';
+
+            // Garante que a descrição não seja obrigatória se for aba de vídeo/foto
+             descricaoTextarea.required = (abaParaAtivar.id === 'aba-texto');
+        }
+
+        // Inicializa o estado (Texto ativo)
+        campoTexto.style.display = 'block';
+        campoVideo.style.display = 'none';
+
+        abaTexto.addEventListener('click', () => {
+            ativarAba(abaTexto, campoTexto, campoVideo);
+        });
+
+        abaVideo.addEventListener('click', () => {
+            ativarAba(abaVideo, campoVideo, campoTexto);
+        });
+
+        // Lógica de Submissão (Fetch para o backend)
         document.getElementById("form-relato").addEventListener("submit", async (event) => {
             event.preventDefault();
 
@@ -48,7 +146,7 @@
 
                 if (resposta.ok) {
                     alert("✅ Relato publicado com sucesso!");
-                    window.location.href = "../view/comunidade.html";
+                    window.location.href = "/view/comunidade.html";
                 } else {
                     alert("❌ Erro: " + resultado.message);
                 }

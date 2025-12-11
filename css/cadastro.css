@@ -84,8 +84,22 @@ body {
 
 /* rodapé */
 .rodape {
-    margin-top: 40px;
+    background-color: #6b8490;
     padding: 20px;
     text-align: center;
-    background: #6b8490;
+    margin-top: auto;
+    /* <-- SEGUNDA PARTE DO AJUSTE */
+}
+
+.rodape-conteudo p {
+    margin: 4px 0;
+}
+
+.redes-sociais img {
+    width: 24px;
+    margin: 0 5px;
+}
+
+.redes-sociais {
+    margin: 8px 0;
 }

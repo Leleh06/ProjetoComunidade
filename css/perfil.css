@@ -122,17 +122,21 @@
 /* Rodapé */
 .rodape {
     background-color: #6b8490;
-    color: #333;
-    text-align: center;
     padding: 20px;
+    text-align: center;
+    margin-top: auto;
+    /* <-- SEGUNDA PARTE DO AJUSTE */
 }
 
-.rodape p {
-    margin: 5px 0;
+.rodape-conteudo p {
+    margin: 4px 0;
 }
 
-.redes-sociais a {
-    color: #fff;
-    margin: 0 10px;
-    font-size: 20px;
+.redes-sociais img {
+    width: 24px;
+    margin: 0 5px;
+}
+
+.redes-sociais {
+    margin: 8px 0;
 }

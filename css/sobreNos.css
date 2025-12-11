@@ -141,16 +141,25 @@ body.sobre-nos {
 } */
 
 .rodape {
-    background: #6b8490; 
-    padding: 25px;
-    margin-top: 40px;
-}
-
-.rodape-conteudo {
+    background-color: #6b8490;
+    padding: 20px;
     text-align: center;
-    font-size: 15px;
+    margin-top: auto;
+    /* <-- SEGUNDA PARTE DO AJUSTE */
 }
 
+.rodape-conteudo p {
+    margin: 4px 0;
+}
+
+.redes-sociais img {
+    width: 24px;
+    margin: 0 5px;
+}
+
+.redes-sociais {
+    margin: 8px 0;
+}
 
 /* Container do formulário */
 form {
