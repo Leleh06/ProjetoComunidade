@@ -15,10 +15,10 @@ const createONG = async (nome, cnpj, area_atuacao, email, senha, contato) => {
 // Logar Ong
 const logarONG = async (email, senha) => {
     const [results] = await db.query(
-        'SELECT * FROM ong WHERE `email`=? and `senha`=?',
+        'SELECT * FROM ongs WHERE `email`=? and `senha`=?',
         [email, senha]);
     const [ongLogada] = await db.query(
-        'SELECT * FROM ong WHERE id_ong=?',
+        'SELECT * FROM ongs WHERE id_ong=?',
         results.insertId);
     return ongLogada;
 }

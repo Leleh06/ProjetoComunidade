@@ -83,33 +83,33 @@
     <script>
     //    aparecer post de relatos
 
-    const url = "http://localhost:3000/relatoListar";
-    fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json"
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log("O que vem dentro do data???", data);
+    // const url = "http://localhost:3000/relatoListar";
+    // fetch(url, {
+    //     method: "GET",
+    //     headers: {
+    //         "Content-type": "application/json"
+    //     }
+    // })
+    // .then(res => res.json())
+    // .then(data => {
+    //     console.log("O que vem dentro do data???", data);
 
-        let html = ``;
-        if(data) {
-            for(let i=0; i < data.length; i++){
-                const element = data[i] ;
+    //     let html = ``;
+    //     if(data) {
+    //         for(let i=0; i < data.length; i++){
+    //             const element = data[i] ;
     
-                html += `<div class="card">
-                    <img src="https://placehold.co/200" alt="">
-                    <h5>${element.titulo}</h5>
-                    <p>${element.descricao}</p>
-                    <a href="#" class="link">Ver mais</a>
-                </div>`;
-            }
-        }
-        document.getElementById("cards").innerHTML = html;
-    })
-    .catch(erro => console.log("Ocorreu um erro: ", erro))
+    //             html += `<div class="card">
+    //                 <img src="https://placehold.co/200" alt="">
+    //                 <h5>${element.titulo}</h5>
+    //                 <p>${element.descricao}</p>
+    //                 <a href="#" class="link">Ver mais</a>
+    //             </div>`;
+    //         }
+    //     }
+    //     document.getElementById("cards").innerHTML = html;
+    // })
+    // .catch(erro => console.log("Ocorreu um erro: ", erro))
 
     </script>
 </body>

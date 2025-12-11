@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade</title>
+    <title>Comunidade - Conecta+</title>
     <link rel="stylesheet" href="/css/comunidade.css">
 </head>
 
 <body>
-
     <!-- CABEÇALHO -->
     <header class="cabecalho">
         <div class="logo">
@@ -27,102 +26,27 @@
 
     <!-- SEÇÃO DOS RELATOS -->
     <section class="secao-relatos">
-
         <h2>RELATOS DA COMUNIDADE</h2>
 
         <!-- DROPDOWN -->
         <div class="dropdown">
             <button class="dropdown-button" onclick="toggleDropdown()">Tipos de conteúdo</button>
-
             <ul class="dropdown-menu" id="dropdownMenu">
-                <li><a href="#">Denúncia</a></li>
-                <li><a href="#">Perigos</a></li>
-                <li><a href="#">Sobre o bairro</a></li>
+                <li><a href="#" data-categoria="Todos">Todos</a></li>
+                <li><a href="#" data-categoria="Denúncia">Denúncia</a></li>
+                <li><a href="#" data-categoria="Perigo">Perigo</a></li>
+                <li><a href="#" data-categoria="Sobre o Bairro">Sobre o Bairro</a></li>
             </ul>
         </div>
 
-        <!-- CARDS -->
-        <div class="cards-container">
 
-            <!-- CARD 1 -->
-            <div class="card-relato">
-                <h4>Ana Carolina Quirino</h4>
-                <small><strong>Rio Vermelho 12/02/25</strong></small>
-
-                <img src="/imgs/alagamento.png" alt="Alagamento">
-
-                <p>
-                    O bairro tem sofrido com muitos alagamentos, o que tem dificultado a passagem dos moradores.
-                </p>
-
-                <div class="acoes-relato">
-                    <button>Curtir</button>
-                    <button>Comentar</button>
-                    <button>Compartilhar</button>
-                </div>
-            </div>
-
-            <!-- CARD 2 -->
-            <div class="card-relato">
-                <h4>Leticya Dias</h4>
-                <small><strong>Rio Vermelho 14/01/24</strong></small>
-
-                <img src="/imgs/rua.png" alt="Rua escura">
-
-                <p>
-                    As ruas são muito estreitas e há pouca iluminação, causando sensação de insegurança.
-                </p>
-
-                <div class="acoes-relato">
-                    <button>Curtir</button>
-                    <button>Comentar</button>
-                    <button>Compartilhar</button>
-                </div>
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="card-relato">
-                <h4>Geovanna Campos</h4>
-                <small><strong>Rio Vermelho 04/09/24</strong></small>
-
-                <img src="/imgs/onibus.png" alt="Ônibus">
-
-                <p>
-                    Peguei um ônibus Costa do Mocangibí no terminal TICAN às 20h e tive que andar tudo de volta.
-                </p>
-
-                <div class="acoes-relato">
-                    <button>Curtir</button>
-                    <button>Comentar</button>
-                    <button>Compartilhar</button>
-                </div>
-            </div>
-
-            <!-- CARD 4 -->
-            <div class="card-relato">
-                <h4>Maiara Lima</h4>
-                <small><strong>Rio Vermelho 06/02/25</strong></small>
-
-                <img src="/imgs/ruaperigo.png" alt="Rua perigosa">
-
-                <p>
-                    Algumas áreas do Rio Vermelho são perigosas, e havia venda de drogas perto da minha casa.
-                </p>
-
-                <div class="acoes-relato">
-                    <button>Curtir</button>
-                    <button>Comentar</button>
-                    <button>Compartilhar</button>
-                </div>
-            </div>
-
-        </div>
+        <!-- CARDS DINÂMICOS -->
+        <div class="cards-container" id="cards-container"></div>
 
         <!-- BOTÃO ENVIAR RELATO -->
         <div class="enviar-relato">
             <a href="../view/publicarRelato.html">ENVIAR RELATO</a>
         </div>
-
     </section>
 
     <!-- RODAPÉ -->
@@ -147,17 +71,94 @@
         </div>
     </footer>
 
+    <!-- SCRIPT -->
     <script>
         function toggleDropdown() {
             document.getElementById("dropdownMenu").classList.toggle("show");
         }
 
         // Fecha o dropdown ao clicar fora
-        window.onclick = function (e) {
-            if (!e.target.matches(".dropdown-button")) {
-                document.getElementById("dropdownMenu").classList.remove("show");
+        window.addEventListener("click", (e) => {
+            const btn = e.target.closest(".dropdown-button");
+            if (!btn) document.getElementById("dropdownMenu").classList.remove("show");
+        });
+
+        const container = document.getElementById("cards-container");
+        let todosRelatos = [];
+
+        function renderCards(relatos) {
+            if (!relatos || relatos.length === 0) {
+                container.innerHTML = "<p>Nenhum relato encontrado.</p>";
+                return;
+            }
+
+            const html = relatos.map(relato => {
+                let midias = "";
+
+                if (relato.foto) {
+                    midias += `<img src="data:image/jpeg;base64,${relato.foto}" alt="Foto do relato">`;
+                }
+                if (relato.video) {
+                    midias += `
+          <video controls width="300">
+            <source src="data:video/mp4;base64,${relato.video}" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        `;
+                }
+
+                return `
+        <div class="card-relato">
+          <h4>${relato.nome || "Anônimo"}</h4>
+          <small><strong>${relato.categoria}</strong></small>
+          <p>${relato.descricao}</p>
+          ${midias}
+          <div class="acoes-relato">
+            <button>Curtir</button>
+            <button>Comentar</button>
+            <button>Compartilhar</button>
+          </div>
+        </div>
+      `;
+            }).join("");
+
+            container.innerHTML = html;
+        }
+
+        // Busca inicial dos relatos
+        async function carregarRelatos() {
+            try {
+                const res = await fetch("http://localhost:3000/relatoListar");
+                const data = await res.json();
+                todosRelatos = (data && data.data) ? data.data : [];
+                renderCards(todosRelatos);
+            } catch (err) {
+                console.error("Erro ao carregar relatos:", err);
+                container.innerHTML = "<p>Erro ao carregar relatos.</p>";
             }
         }
+
+        // Filtro por categoria
+        document.getElementById("dropdownMenu").addEventListener("click", (e) => {
+            const link = e.target.closest("a[data-categoria]");
+            if (!link) return;
+
+            e.preventDefault(); // Evita navegação #
+            const categoria = link.getAttribute("data-categoria");
+
+            if (categoria === "Todos") {
+                renderCards(todosRelatos);
+            } else {
+                const filtrados = todosRelatos.filter(r => r.categoria === categoria);
+                renderCards(filtrados);
+            }
+
+            // Fecha o dropdown após selecionar
+            document.getElementById("dropdownMenu").classList.remove("show");
+        });
+
+        // Iniciar
+        carregarRelatos();
     </script>
 
 </body>

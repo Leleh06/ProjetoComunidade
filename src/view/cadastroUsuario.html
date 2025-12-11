@@ -52,7 +52,7 @@
     </footer>
 
 
-    <script>
+    <!-- <script>
     
         document.getElementById("form-simples").addEventListener("submit", function (event) {
             event.preventDefault(); 
@@ -87,8 +87,33 @@
                     console.error("Erro na requisição:", error);
                 });
         });
-    </script>
+    </script> -->
 
+    <script>
+        document.getElementById("form-simples")?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const nome = document.getElementById("nome").value;
+            const bairro = document.getElementById("bairro").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            const resposta = await fetch("http://localhost:3000/usuarioCriar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, bairro, email, senha }),
+                credentials: "include"
+            });
+
+            if (resposta.ok) {
+                alert("Usuário cadastrado com sucesso!");
+                window.location.href = "../view/login.html";
+            } else {
+                alert("Erro ao cadastrar usuário");
+            }
+        });
+
+    </script>
+    
 </body>
 
 </html>

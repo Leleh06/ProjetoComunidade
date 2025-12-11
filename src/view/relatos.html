@@ -27,31 +27,8 @@
     </header>
 
     <main class="conteudo">
-
-        <div class="lista-relatos">
-
-            <div class="cartao">
-                <img src="/imgs/img-onibus.png" alt="Imagem ônibus">
-                <p>Peguei um ônibus Costa do Moçambique no terminal tican por volta das 20:00, e ele me levou até São
-                    João do Rio Vermelho tive que andar todo caminho de volta para minha casa.</p>
-            </div>
-
-            <div class="cartao">
-                <img src="/imgs/img-rua.png" alt="Imagem rua">
-                <p>Algumas áreas do Rio Vermelho são bastante perigosas. Eu morava no Ingleses do Rio Vermelho, e na
-                    minha rua havia um ponto de venda de drogas, o que fazia com que as pessoas olhassem com
-                    desconfiança e receio ao passar por ali.</p>
-            </div>
-
-            <div class="cartao">
-                <img src="/imgs/img-alagamento.png" alt="Imagem alagamento">
-                <p>As ruas são muito estreitas e há pouca iluminação, o que causa uma sensação de insegurança ao
-                    caminhar por elas.</p>
-            </div>
-        </div>
-
+        <div class="lista-relatos" id="lista-relatos"></div>
         <a class="botao-novo" href="../view/publicarRelato.html">Novo relato</a>
-
     </main>
 
     <footer class="rodape">
@@ -59,6 +36,93 @@
         <p><strong>Telefone:</strong> (48) 3239-5801</p>
         <p><strong>© 2025 Conecta+. Todos os direitos reservados.</strong></p>
     </footer>
+
+    <script>
+        async function carregarRelatos() {
+            try {
+                const resposta = await fetch("http://localhost:3000/relatoListar");
+                const resultado = await resposta.json();
+
+                const container = document.getElementById("lista-relatos");
+
+                const relatosValidos = resultado.data.filter(r =>
+                    r.descricao && r.descricao.length >= 10 && r.categoria
+                );
+
+                if (resposta.ok && relatosValidos.length > 0) {
+                    container.innerHTML = relatosValidos.map(r => {
+                        const textoLimpo = r.descricao.length > 300
+                            ? r.descricao.slice(0, 300) + "..."
+                            : r.descricao;
+
+                        return `
+              <div class="cartao">
+                ${r.foto ? `<img src="data:image/jpeg;base64,${r.foto}" alt="Imagem relato">` : ""}
+                <p><strong>${r.nome || "Anônimo"}</strong></p>
+                <p><em>${r.categoria}</em></p>
+                <p>${textoLimpo}</p>
+                ${r.video ? `<video controls src="data:video/mp4;base64,${r.video}"></video>` : ""}
+                <button onclick="editarRelato(${r.id_post})">Editar</button>
+                <button onclick="deletarRelato(${r.id_post})">Excluir</button>
+              </div>
+            `;
+                    }).join("");
+                } else {
+                    container.innerHTML = "<p>Você ainda não tem relatos válidos.</p>";
+                }
+            } catch (error) {
+                console.error("Erro ao carregar relatos:", error);
+                document.getElementById("lista-relatos").innerHTML = "<p>Erro ao carregar relatos.</p>";
+            }
+        }
+
+        async function deletarRelato(id) {
+            if (!confirm("Tem certeza que deseja excluir este relato?")) return;
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/relatoDelet/${id}`, {
+                    method: "DELETE"
+                });
+                const resultado = await resposta.json();
+                alert(resultado.message);
+                carregarRelatos();
+            } catch (error) {
+                console.error("Erro ao excluir relato:", error);
+                alert("Erro ao excluir relato.");
+            }
+        }
+
+        async function editarRelato(id) {
+            const novoNome = prompt("Novo nome:");
+            const novaCategoria = prompt("Nova categoria:");
+            const novaDescricao = prompt("Nova descrição (mínimo 10 caracteres):");
+
+            if (!novaDescricao || novaDescricao.length < 10) {
+                alert("A descrição precisa ter pelo menos 10 caracteres.");
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/relatoUpdate/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nome: novoNome,
+                        categoria: novaCategoria,
+                        descricao: novaDescricao
+                    })
+                });
+                const resultado = await resposta.json();
+                alert(resultado.message);
+                carregarRelatos();
+            } catch (error) {
+                console.error("Erro ao editar relato:", error);
+                alert("Erro ao editar relato.");
+            }
+        }
+
+        carregarRelatos();
+    </script>
 
 </body>
 

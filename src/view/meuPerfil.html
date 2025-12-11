@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu perfil</title>
-
     <link rel="stylesheet" href="/css/perfil.css">
 </head>
 
@@ -29,21 +28,22 @@
         <section class="perfil-completo">
             <div class="lado-esquerdo">
                 <img src="/imgs/imagem-perfil.png" alt="Foto de Perfil" class="foto-perfil">
-                <a href="#"><button class="btn">Editar Perfil</button></a>
+                <button class="btn" onclick="logout()">Sair</button>
             </div>
 
             <div class="lado-direito">
-                <h2>Nome do Usuário</h2>
+                <h2 id="perfil-nome">Nome</h2>
 
-                <p><strong>Email:</strong> usuario@email.com</p>
-                <p><strong>Cidade:</strong> Curitiba</p>
-                <p><strong>Bio:</strong></p>
-
-                <textarea rows="4" placeholder="digite sua bio..."></textarea>
+                <p><strong>Email:</strong> <span id="perfil-email"></span></p>
+                <p id="perfil-bairro"></p>
+                <p id="perfil-area"></p>
+                <p id="perfil-cnpj"></p>
+                <p><strong>Contato:</strong> <span id="perfil-contato"></span></p>
 
                 <div class="botoes">
                     <a class="btn" href="/src/view/relatos.html">Meus relatos</a>
-                    <a class="btn" href="#">Deletar Usuário</a>
+                    <a class="btn" href="#">Editar Perfil</a>
+                    <a class="btn" href="#">Deletar Conta</a>
                 </div>
             </div>
         </section>
@@ -54,6 +54,48 @@
         <div class="rodape-conteudo">
             <p><strong>Endereço:</strong> SC-401, 3730 - Saco Grande, Florianópolis - SC, 88032-005</p>
             <p><strong>Telefone:</strong> (48) 3239-5801</p>
+        </div>
+    </footer>
 
-            <div class="redes-sociais">
-                <a href="https://wa.me/554832395801" target="_blank">
+    <script>
+        function carregarPerfil() {
+            const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+            const ong = JSON.parse(localStorage.getItem("ongLogada"));
+
+            const data = usuario || ong;
+
+            if (!data) {
+                window.location.href = "../view/login.html";
+                return;
+            }
+
+            document.getElementById("perfil-nome").textContent = data.nome || "";
+            document.getElementById("perfil-email").textContent = data.email || "";
+            document.getElementById("perfil-contato").textContent = data.contato || "";
+
+            if (data.bairro) {
+                document.getElementById("perfil-bairro").textContent = `Bairro: ${data.bairro}`;
+            }
+
+            if (data.area_atuacao) {
+                document.getElementById("perfil-area").textContent = `Área de atuação: ${data.area_atuacao}`;
+            }
+
+            if (data.cnpj) {
+                document.getElementById("perfil-cnpj").textContent = `CNPJ: ${data.cnpj}`;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("usuarioLogado");
+            localStorage.removeItem("ongLogada");
+            window.location.href = "../view/login.html";
+        }
+
+        carregarPerfil();
+    </script>
+
+
+</body>
+
+</html>

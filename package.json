@@ -14,6 +14,16 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.2.1",
+    "express-session": "^1.18.2",
+    "multer": "^2.0.2",
     "mysql2": "^3.15.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leleh06/ProjetoComunidade.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Leleh06/ProjetoComunidade/issues"
+  },
+  "homepage": "https://github.com/Leleh06/ProjetoComunidade#readme"
 }

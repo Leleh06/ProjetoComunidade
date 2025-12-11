@@ -31,8 +31,8 @@
             <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
 
             <div class="botao">
-                <button type="submit" class="login-button">ENTRAR Usuário</button>
-                <button type="submit" class="login-button-ong">ENTRAR ONG</button>
+                <button type="submit" id="login-button" class="login-button">ENTRAR Usuário</button>
+                <button type="submit" id="login-button-ong" class="login-button-ong">ENTRAR ONG</button>
 
                 <a class="signup-link" href="../view/cadastroUsuario.html">Não tem conta? Cadastre-se Usuário</a>
                 <a class="signup-link" href="../view/cadastroONG.html">Cadastre-se ONG</a>
@@ -68,7 +68,8 @@
     </footer>
 
 
-    <script>
+    <!-- <script>
+
         // LOGIN USUÁRIO
         document.getElementById("login-button")?.addEventListener("submit", async (event) => {
             event.preventDefault();
@@ -115,7 +116,126 @@
                 alert("Email ou senha inválidos (ONG)");
             }
         });
+    </script> -->
+
+    <!-- <script>
+        
+        /// LOGIN USUÁRIO
+        document.getElementById("login-container")?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            try {
+                const resposta = await fetch("http://localhost:3000/logout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tipo: "usuario", email, senha }),
+                    credentials: "include"
+                });
+
+                if (resposta.ok) {
+                    window.location.href = "../view/meuPerfil.html";
+                } else {
+                    const erro = await resposta.text();
+                    console.error("Erro login usuário:", erro);
+                    alert("Email ou senha inválidos (usuário)");
+                }
+            } catch (error) {
+                console.error("Erro na requisição usuário:", error);
+                alert("Falha na comunicação com o servidor");
+            }
+        });
+
+        // LOGIN ONG
+        document.getElementById("login-container")?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            try {
+                const resposta = await fetch("http://localhost:3000/logout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tipo: "ong", email, senha }),
+                    credentials: "include"
+                });
+
+                if (resposta.ok) {
+                    window.location.href = "../view/meuPerfil.html";
+                } else {
+                    const erro = await resposta.text();
+                    console.error("Erro login ONG:", erro);
+                    alert("Email ou senha inválidos (ONG)");
+                }
+            } catch (error) {
+                console.error("Erro na requisição ONG:", error);
+                alert("Falha na comunicação com o servidor");
+            }
+        });
+
+
+    </script> -->
+
+
+    <script>
+        // LOGIN USUÁRIO
+        document.getElementById("login-button").addEventListener("click", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            try {
+                const resposta = await fetch("http://localhost:3000/loginUser", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                const resultado = await resposta.json();
+
+                if (resposta.ok) {
+                    // Salva no localStorage
+                    localStorage.setItem("usuarioLogado", JSON.stringify(resultado.data[0]));
+                    window.location.href = "../view/inicio2.html";
+                } else {
+                    alert("Email ou senha inválidos (Usuário)");
+                }
+            } catch (error) {
+                console.error("Erro login usuário:", error);
+                alert("Falha na comunicação com o servidor");
+            }
+        });
+
+        // LOGIN ONG
+        document.getElementById("login-button-ong").addEventListener("click", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("senha").value;
+
+            try {
+                const resposta = await fetch("http://localhost:3000/loginOng", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                const resultado = await resposta.json();
+
+                if (resposta.ok) {
+                    // Salva no localStorage
+                    localStorage.setItem("ongLogada", JSON.stringify(resultado.data));
+                    window.location.href = "../view/inicio2.html";
+                } else {
+                    alert("Email ou senha inválidos (ONG)");
+                }
+            } catch (error) {
+                console.error("Erro login ONG:", error);
+                alert("Falha na comunicação com o servidor");
+            }
+        });
     </script>
+
 </body>
 
 </html>
